@@ -19,6 +19,26 @@
       --email-dark: #00e5ff;
     }
 
+    .section {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* Light mode card background + border + shadow */
+body.light .section {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Dark mode card background */
+body.dark .section {
+  background: rgba(255, 255, 255, 0.05);
+}
+
     body {
       font-family: system-ui, sans-serif;
       max-width: 700px;
