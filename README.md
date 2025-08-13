@@ -1,0 +1,2 @@
+# fastwhale-site
+🚀
