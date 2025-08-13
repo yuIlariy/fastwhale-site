@@ -11,6 +11,8 @@
       --text-light: #333;
       --bg-dark: #121212;
       --text-dark: #f4f4f4;
+      --email-light: #0070f3;
+      --email-dark: #00e5ff;
     }
 
     body {
@@ -106,12 +108,20 @@
     }
 
     .email-link {
-      color: #00e5ff;
       text-decoration: underline;
+      transition: color 0.3s ease;
+    }
+
+    body.light .email-link {
+      color: var(--email-light);
+    }
+
+    body.dark .email-link {
+      color: var(--email-dark);
     }
 
     .email-link:hover {
-      color: #00bcd4;
+      opacity: 0.8;
     }
 
     .toggle-btn {
@@ -204,5 +214,4 @@
   </script>
 </body>
 </html>
-
 
