@@ -99,12 +99,18 @@ body.dark .section {
       font-size: 1.1rem;
       line-height: 1.6;
     }
+    
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 0.5rem;
+      margin-bottom: 1rem;
+    }
 
     .button {
       display: inline-block;
       padding: 0.6rem 1.2rem;
-      margin-top: 0.5rem;
-      margin-bottom: 1rem;
       font-size: 1rem;
       font-weight: 500;
       border-radius: 6px;
@@ -144,7 +150,16 @@ body.dark .section {
       background-color: #263238;
     }
 
-    .github i {
+    .bots-channel {
+      background-color: #0088cc;
+    }
+    
+    .bots-channel:hover {
+      background-color: #006da3;
+    }
+
+    .github i,
+    .bots-channel i {
       margin-right: 8px;
       vertical-align: middle;
     }
@@ -216,10 +231,15 @@ body.dark .section {
   <button class="toggle-btn" onclick="toggleTheme()" id="themeToggle">🌙</button>
 
   <div class="section intro">
-    <p>Welcome to my corner of the internet. I'm Nam — Ads manager, a builder, optimizer, and Telegram bot architect with zero tolerance for fluff and full commitment to precision. If it runs, I’ve probably patched it. If it breaks, I fix fast.</p>
-    <a href="https://github.com/yuIlariy" target="_blank" class="button github">
-      <i class="fab fa-github"></i>GitHub Profile
-    </a>
+    <p>Welcome to my corner of the internet. I'm Nam — Ads manager, a builder, optimizer, and Telegram bot architect with zero tolerance for fluff and full commitment to precision. If it runs, I've probably patched it. If it breaks, I fix fast.</p>
+    <div class="button-row">
+      <a href="https://github.com/yuIlariy" target="_blank" class="button github">
+        <i class="fab fa-github"></i>GitHub Profile
+      </a>
+      <a href="https://t.me/OtherBs" target="_blank" class="button bots-channel" data-tooltip="My Telegram bots channel">
+        <i class="fab fa-telegram-plane"></i>Bots Channel
+      </a>
+    </div>
   </div>
 
   <div class="section">
@@ -316,10 +336,10 @@ body.dark .section {
   document.getElementById('year').textContent = new Date().getFullYear();
 
   const quotes = [
-    "FastWhale: Where bots don’t sleep and DNS never fails.",
+    "FastWhale: Where bots don't sleep and DNS never fails.",
     "Built fast. Runs faster. Breaks never.",
     "Precision is my love language.",
-    "If it’s patched, it’s probably Nam.",
+    "If it's patched, it's probably Nam.",
     "Minimal by design, maximal by impact."
   ];
   document.getElementById('footerQuote').textContent =
