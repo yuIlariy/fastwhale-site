@@ -20,24 +20,24 @@
     }
 
     .section {
-  margin-bottom: 2rem;
-  padding: 1.5rem;
-  border-radius: 12px;
-  backdrop-filter: blur(10px);
-  animation: fadeInUp 0.6s ease-out;
-}
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+      animation: fadeInUp 0.6s ease-out;
+    }
 
-/* Light mode card background + border + shadow */
-body.light .section {
-  background: rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
+    /* Light mode card background + border + shadow */
+    body.light .section {
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
 
-/* Dark mode card background */
-body.dark .section {
-  background: rgba(255, 255, 255, 0.05);
-}
+    /* Dark mode card background */
+    body.dark .section {
+      background: rgba(255, 255, 255, 0.05);
+    }
 
     body {
       font-family: system-ui, sans-serif;
@@ -67,6 +67,13 @@ body.dark .section {
 
     h2, h3 {
       margin-top: 1rem;
+    }
+    
+    .subheading {
+      font-size: 0.9rem;
+      opacity: 0.8;
+      margin-top: 0.3rem;
+      margin-bottom: 0.5rem;
     }
 
     .animated-title {
@@ -106,6 +113,26 @@ body.dark .section {
       gap: 10px;
       margin-top: 0.5rem;
       margin-bottom: 1rem;
+    }
+    
+    .bot-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin: 1rem 0;
+    }
+    
+    .bot-item {
+      flex: 1;
+      min-width: 250px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 1rem;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+    
+    body.light .bot-item {
+      background: rgba(0, 0, 0, 0.03);
     }
 
     .button {
@@ -157,9 +184,18 @@ body.dark .section {
     .bots-channel:hover {
       background-color: #006da3;
     }
+    
+    .bot {
+      background-color: #00bcd4;
+    }
+
+    .bot:hover {
+      background-color: #0097a7;
+    }
 
     .github i,
-    .bots-channel i {
+    .bots-channel i,
+    .bot i {
       margin-right: 8px;
       vertical-align: middle;
     }
@@ -223,6 +259,17 @@ body.dark .section {
     #backToTop:hover {
       background: #3700b3;
     }
+    
+    .footer-whale {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .footer-quote {
+      margin-top: 0.5rem;
+      font-style: italic;
+      opacity: 0.8;
+    }
   </style>
 </head>
 <body>
@@ -231,7 +278,7 @@ body.dark .section {
   <button class="toggle-btn" onclick="toggleTheme()" id="themeToggle">🌙</button>
 
   <div class="section intro">
-    <p>Welcome to my corner of the internet. I'm Nam — Ads manager, a builder, optimizer, and Telegram bot architect with zero tolerance for fluff and full commitment to precision. If it runs, I've probably patched it. If it breaks, I fix fast.</p>
+    <p>Welcome to my corner of the internet 🌐! I'm Nam — Ads manager 📊, a builder 🔨, optimizer ⚡, and Telegram bot architect 🤖 with zero tolerance for fluff and full commitment to precision 🎯. If it runs, I've probably patched it 🔧. If it breaks, I fix fast 🚀.</p>
     <div class="button-row">
       <a href="https://github.com/yuIlariy" target="_blank" class="button github">
         <i class="fab fa-github"></i>GitHub Profile
@@ -245,71 +292,61 @@ body.dark .section {
   <div class="section">
     <h2>📢 My Telegram Channels</h2>
 
-    <h3>Main</h3>
-    <a href="https://t.me/unlimapkexe" target="_blank" class="button appstore" data-tooltip="Main channel for app releases">Visit on App Store</a>
+    <h3>Main Channel 🎯</h3>
+    <p class="subheading">Your go-to source for latest app releases 📲</p>
+    <a href="https://t.me/unlimapkexe" target="_blank" class="button appstore" data-tooltip="Main channel for app releases">Visit Channel 🚀</a>
 
-    <h3>Secondary</h3>
-    <a href="https://t.me/mod_apk_premiums" target="_blank" class="button apk" data-tooltip="Premium APKs and mods">APK Premiums 🚀</a>
+    <h3>Secondary Channel 🔥</h3>
+    <p class="subheading">Premium APKs & mods for the savvy user 🎁</p>
+    <a href="https://t.me/mod_apk_premiums" target="_blank" class="button apk" data-tooltip="Premium APKs and mods">APK Premiums 🎯</a>
   </div>
-  <style>
-  /* Bot button fix */
-  .bot {
-    background-color: #00bcd4;
-  }
 
-  .bot:hover {
-    background-color: #0097a7;
-  }
+  <div class="section">
+    <h2>🤖 My Telegram Bots</h2>
+    
+    <h3>Restricted Content Saver Bot 🔓</h3>
+    <p class="subheading">Save restricted Telegram content with ease 💾</p>
+    <a href="https://t.me/RestrictedContentSaverXBot" target="_blank" class="button bot" data-tooltip="Save restricted Telegram content">
+      <i class="fab fa-telegram-plane"></i>Try Now
+    </a>
+    
+    <div class="bot-row">
+      <div class="bot-item">
+        <h3>Digital Renamer Bot 📁</h3>
+        <p class="subheading">2GB+ files rename support, premium option 📜</p>
+        <a href="https://t.me/digitalfilesrenamebot" target="_blank" class="button bot" data-tooltip="Rename files automatically">
+          <i class="fab fa-telegram-plane"></i>Try Now
+        </a>
+      </div>
+      
+      <div class="bot-item">
+        <h3>Auto Renamer Bot ⚡</h3>
+        <p class="subheading">For general files & documents 📄</p>
+        <a href="https://t.me/AutoRenameTBot" target="_blank" class="button bot" data-tooltip="Auto-renames files in Telegram">
+          <i class="fab fa-telegram-plane"></i>Try Now
+        </a>
+      </div>
+    </div>
+    
+    <h3>Movie & Series Renamer Bot 🎬</h3>
+    <p class="subheading">Specialized renaming for media files 🍿</p>
+    <a href="https://t.me/AutoRenamersBot" target="_blank" class="button bot" data-tooltip="Rename movies and series">
+      <i class="fab fa-telegram-plane"></i>Try Now
+    </a>
+  </div>
 
-  /* Contact button fix */
-  .contact {
-    background-color: #6200ea;
-  }
-
-  .contact:hover {
-    background-color: #3700b3;
-  }
-
-  /* WhatsApp button fix */
-  .whatsapp {
-    background-color: #25D366;
-  }
-
-  .whatsapp:hover {
-    background-color: #1DA851;
-  }
-
-  .contact i,
-  .whatsapp i {
-    margin-right: 8px;
-    vertical-align: middle;
-  }
-</style>
-
-<div class="section">
-  <h2>🤖 My Telegram Bots</h2>
-
-  <h3>Restricted Content Saver</h3>
-  <a href="https://t.me/RestrictedContentSaverXBot" target="_blank" class="button bot" data-tooltip="Save restricted Telegram content">Visit Now</a>
-
-  <h3>Digital Renamer</h3>
-  <a href="https://t.me/digitalfilesrenamebot" target="_blank" class="button bot" data-tooltip="Rename files automatically">Visit Now</a>
-
-  <h3>Auto Renamer</h3>
-  <a href="https://t.me/AutoRenameTBot" target="_blank" class="button bot" data-tooltip="Auto-renames files in Telegram">Visit Now</a>
-</div>
-
-<div class="section">
-  <h2>📬 Contact Me</h2>
-  <a href="https://t.me/xspes" target="_blank" class="button contact">
-    <i class="fab fa-telegram-plane"></i>Send Message
-  </a><br>
-  <p>Email: <a href="mailto:ping@fastwhale.site" class="email-link">ping@fastwhale.site</a></p>
-  <p>Prefer meta chaos? Hit me on WhatsApp 🌚📱</p>
-  <a href="https://wa.me/254708583813?text=Hey%20Nam!%20Just%20landed%20on%20fastwhale.site%20and%20had%20to%20say%20%E2%80%94%20slick%20setup.%20Got%20a%20minute%3F" target="_blank" class="button whatsapp">
-    <i class="fab fa-whatsapp"></i>WhatsApp Me
-  </a>
-</div>
+  <div class="section">
+    <h2>📬 Contact Me</h2>
+    <p>Have a project in mind? Let's chat! 💬</p>
+    <a href="https://t.me/xspes" target="_blank" class="button contact">
+      <i class="fab fa-telegram-plane"></i>Send Message
+    </a><br>
+    <p>Email: <a href="mailto:ping@fastwhale.site" class="email-link">ping@fastwhale.site</a> 📧</p>
+    <p>Prefer meta chaos? Hit me on WhatsApp 🌚📱</p>
+    <a href="https://wa.me/254708583813?text=Hey%20Nam!%20Just%20landed%20on%20fastwhale.site%20and%20had%20to%20say%20%E2%80%94%20slick%20setup.%20Got%20a%20minute%3F" target="_blank" class="button whatsapp">
+      <i class="fab fa-whatsapp"></i>WhatsApp Me
+    </a>
+  </div>
 
 <footer>
   <div class="footer-whale">🐳</div>
@@ -336,11 +373,11 @@ body.dark .section {
   document.getElementById('year').textContent = new Date().getFullYear();
 
   const quotes = [
-    "FastWhale: Where bots don't sleep and DNS never fails.",
-    "Built fast. Runs faster. Breaks never.",
-    "Precision is my love language.",
-    "If it's patched, it's probably Nam.",
-    "Minimal by design, maximal by impact."
+    "FastWhale: Where bots don't sleep and DNS never fails. ⚡",
+    "Built fast. Runs faster. Breaks never. 🚀",
+    "Precision is my love language. 🎯",
+    "If it's patched, it's probably Nam. 🔧",
+    "Minimal by design, maximal by impact. ✨"
   ];
   document.getElementById('footerQuote').textContent =
     quotes[Math.floor(Math.random() * quotes.length)];
