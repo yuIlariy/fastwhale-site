@@ -17,6 +17,8 @@
       --text-dark: #f4f4f4;
       --email-light: #0070f3;
       --email-dark: #00e5ff;
+      --primary: #6200ea;
+      --primary-hover: #3700b3;
     }
 
     .section {
@@ -258,27 +260,46 @@
       transform: rotate(20deg);
     }
 
+    /* Professional Back to Top Button */
     #backToTop {
       position: fixed;
       bottom: 2rem;
-      right: 1rem;
-      font-size: 1.5rem;
-      background: #6200ea;
+      right: 1.5rem;
+      width: 50px;
+      height: 50px;
+      background: var(--primary);
       color: white;
       border: none;
       border-radius: 50%;
-      padding: 0.6rem;
       cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
       display: none;
       z-index: 999;
-      transition: background 0.3s ease;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      opacity: 0;
+      transform: translateY(20px);
+      font-size: 1.2rem;
+    }
+    
+    #backToTop.show {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 1;
+      transform: translateY(0);
     }
 
     #backToTop:hover {
-      background: #3700b3;
+      background: var(--primary-hover);
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+      transform: translateY(-3px);
     }
     
+    #backToTop:active {
+      transform: translateY(0);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    }
+
     .footer-whale {
       font-size: 1.5rem;
       margin-bottom: 0.5rem;
@@ -374,7 +395,9 @@
   <div class="footer-quote" id="footerQuote"></div>
 </footer>
 
-<button id="backToTop" title="Back to top">⬆️</button>
+<button id="backToTop" title="Back to top">
+  <i class="fas fa-chevron-up"></i>
+</button>
 
 <script>
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -402,15 +425,22 @@
   document.getElementById('footerQuote').textContent =
     quotes[Math.floor(Math.random() * quotes.length)];
 
+  // Enhanced back to top functionality
   const backToTopBtn = document.getElementById('backToTop');
+  
   window.addEventListener('scroll', () => {
-    backToTopBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
+    const scrollY = window.scrollY;
+    if (scrollY > 300) {
+      backToTopBtn.classList.add('show');
+    } else {
+      backToTopBtn.classList.remove('show');
+    }
   });
+  
   backToTopBtn.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 </script>
 </body>
 </html>
-
 
