@@ -50,9 +50,45 @@
       color: var(--text-dark);
     }
 
+    /* Top Bar & Status */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1rem;
+    }
+
+    .status-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      background: rgba(0, 200, 83, 0.1);
+      color: #00c853;
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: 1px solid rgba(0, 200, 83, 0.2);
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      background-color: #00c853;
+      border-radius: 50%;
+      box-shadow: 0 0 0 0 rgba(0, 200, 83, 0.7);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 200, 83, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(0, 200, 83, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 200, 83, 0); }
+    }
+
     /* Upgraded Animated Gradient Title */
     h1 {
-      margin-top: 1rem;
+      margin-top: 0.5rem;
       font-size: 2.5rem;
       font-weight: 800;
     }
@@ -157,6 +193,8 @@
       transition: all 0.3s ease;
       color: white;
       position: relative;
+      cursor: pointer;
+      border: none;
     }
 
     .button i {
@@ -206,20 +244,79 @@
     }
     .btn-premium:hover { background: linear-gradient(135deg, #e68300, #ffa000); }
 
+    /* Tabs System */
+    .tabs-header {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 1.5rem;
+      border-bottom: 2px solid rgba(128, 128, 128, 0.1);
+      overflow-x: auto;
+      padding-bottom: 5px;
+    }
+    
+    /* Hide scrollbar for tabs */
+    .tabs-header::-webkit-scrollbar { display: none; }
+    .tabs-header { -ms-overflow-style: none; scrollbar-width: none; }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      color: inherit;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 0.5rem 0.2rem;
+      opacity: 0.6;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+      position: relative;
+    }
+
+    .tab-btn:hover {
+      opacity: 0.8;
+    }
+
+    .tab-btn.active {
+      opacity: 1;
+      color: var(--primary);
+    }
+
+    .tab-btn.active::after {
+      content: '';
+      position: absolute;
+      bottom: -7px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: var(--primary);
+      border-radius: 3px 3px 0 0;
+    }
+
+    .tab-content {
+      display: none;
+      animation: fadeInTab 0.4s ease;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes fadeInTab {
+      from { opacity: 0; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     /* Bot Layouts */
     .bot-featured {
       background: rgba(98, 0, 234, 0.05);
       border: 1px solid rgba(98, 0, 234, 0.2);
       padding: 1.5rem;
       border-radius: 12px;
-      margin-bottom: 1.5rem;
       position: relative;
       overflow: hidden;
     }
 
-    body.dark .bot-featured {
-      background: rgba(98, 0, 234, 0.1);
-    }
+    body.dark .bot-featured { background: rgba(98, 0, 234, 0.1); }
 
     .bot-featured::before {
       content: '';
@@ -232,7 +329,6 @@
       display: flex;
       flex-wrap: wrap;
       gap: 15px;
-      margin: 1rem 0;
     }
     
     .bot-item {
@@ -244,9 +340,10 @@
       border: 1px solid rgba(128, 128, 128, 0.1);
     }
 
-    /* Badges */
+    /* Badges - FIXED FLEX WRAP HERE */
     .badges {
       display: flex;
+      flex-wrap: wrap; 
       gap: 8px;
       margin-bottom: 0.8rem;
     }
@@ -258,6 +355,7 @@
       font-weight: bold;
       text-transform: uppercase;
       letter-spacing: 0.5px;
+      white-space: nowrap;
     }
     
     .badge.pro { background: #e3f2fd; color: #1565c0; }
@@ -291,6 +389,13 @@
       color: var(--primary);
     }
 
+    .email-wrapper {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
     .email-link {
       text-decoration: underline;
       font-weight: 500;
@@ -299,13 +404,38 @@
 
     body.light .email-link { color: var(--email-light); }
     body.dark .email-link { color: var(--email-dark); }
-    .email-link:hover { opacity: 0.8; }
+    
+    .email-wrapper:hover .email-link { opacity: 0.8; }
+    .email-wrapper:hover i { color: var(--primary); }
+
+    /* Toast Notification */
+    #toast {
+      visibility: hidden;
+      min-width: 200px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 8px;
+      padding: 12px;
+      position: fixed;
+      z-index: 1001;
+      left: 50%;
+      bottom: 30px;
+      transform: translateX(-50%);
+      font-size: 0.9rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      opacity: 0;
+      transition: opacity 0.3s, bottom 0.3s;
+    }
+
+    #toast.show {
+      visibility: visible;
+      opacity: 1;
+      bottom: 50px;
+    }
 
     /* Controls */
     .toggle-btn {
-      position: fixed;
-      top: 1.5rem;
-      right: 1.5rem;
       background: rgba(128, 128, 128, 0.1);
       border: 1px solid rgba(128, 128, 128, 0.2);
       border-radius: 50%;
@@ -315,7 +445,6 @@
       cursor: pointer;
       backdrop-filter: blur(5px);
       transition: all 0.3s ease;
-      z-index: 1000;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -387,9 +516,16 @@
   </style>
 </head>
 <body>
-  <h1 class="animated-title">FastWhale 🐋</h1>
 
-  <button class="toggle-btn" onclick="toggleTheme()" id="themeToggle" aria-label="Toggle Dark/Light Mode">🌙</button>
+  <div class="top-bar">
+    <div class="status-indicator">
+      <div class="pulse-dot"></div>
+      Bots Online
+    </div>
+    <button class="toggle-btn" onclick="toggleTheme()" id="themeToggle" aria-label="Toggle Dark/Light Mode">🌙</button>
+  </div>
+
+  <h1 class="animated-title">FastWhale 🐋</h1>
 
   <div class="section intro">
     <p>Welcome to my corner of the internet! I'm Nam — Ads manager, a builder, optimizer, and Telegram bot architect with zero tolerance for fluff and full commitment to precision. If it runs, I've probably patched it. If it breaks, I fix fast.</p>
@@ -413,41 +549,51 @@
   </div>
 
   <div class="section">
-    <h2>🤖 Premium Telegram Bots</h2>
+    <h2>🤖 Telegram Bots</h2>
     
-    <div class="bot-featured">
-      <div class="badges">
-        <span class="badge pro">Flagship Bot</span>
-        <span class="badge heavy">2GB+ Support</span>
-        <span class="badge premium-tag">Cheap Premium</span>
-      </div>
-      <h3>Digital Auto Rename Bot</h3>
-      <p class="subheading">The ultimate file management powerhouse. Built with a robust worker-based architecture and advanced queue management. Seamlessly auto-renames massive 2GB+ files, tracks complex naming sequences, and processes at lightning speed.</p>
-      <p class="subheading"><em>Unlock unlimited power with an incredibly affordable premium tier designed for heavy users.</em></p>
-      <div class="button-row" style="margin-top: 1rem;">
-        <a href="https://t.me/DigitalAutoRenameBot" target="_blank" class="button btn-premium" data-tooltip="Start renaming heavy files automatically">
-          <i class="fas fa-rocket"></i>Launch Bot
-        </a>
+    <div class="tabs-header">
+      <button class="tab-btn active" onclick="openTab(event, 'flagship')"><i class="fas fa-crown"></i> Flagship Bot</button>
+      <button class="tab-btn" onclick="openTab(event, 'utilities')"><i class="fas fa-tools"></i> Utility Bots</button>
+    </div>
+
+    <div id="flagship" class="tab-content active">
+      <div class="bot-featured">
+        <div class="badges">
+          <span class="badge pro">Flagship Bot</span>
+          <span class="badge heavy">2GB+ Support</span>
+          <span class="badge premium-tag">Cheap Premium</span>
+        </div>
+        <h3>Digital Auto Rename Bot</h3>
+        <p class="subheading">The ultimate file management powerhouse. Built with a robust worker-based architecture and advanced queue management. Seamlessly auto-renames massive 2GB+ files, tracks complex naming sequences, and processes at lightning speed.</p>
+        <p class="subheading"><em>Unlock unlimited power with an incredibly affordable premium tier designed for heavy users.</em></p>
+        <div class="button-row" style="margin-top: 1rem;">
+          <a href="https://t.me/DigitalAutoRenameBot" target="_blank" class="button btn-premium" data-tooltip="Start renaming heavy files automatically">
+            <i class="fas fa-rocket"></i>Launch Bot
+          </a>
+        </div>
       </div>
     </div>
-    
-    <div class="bot-row">
-      <div class="bot-item">
-        <h3>Auto Renamers</h3>
-        <p class="subheading">Specialized renaming engine engineered specifically for formatting and organizing Movies & Series.</p>
-        <a href="https://t.me/AutoRenamersBot" target="_blank" class="button bot" data-tooltip="Organize your media files">
-          <i class="fab fa-telegram-plane"></i>Try Now
-        </a>
-      </div>
-      
-      <div class="bot-item">
-        <h3>Digital Files Renamer</h3>
-        <p class="subheading">Alternative high-capacity renaming instance for general files and rapid processing tasks.</p>
-        <a href="https://t.me/digitalfilesrenamebot" target="_blank" class="button bot" data-tooltip="Backup renaming instance">
-          <i class="fab fa-telegram-plane"></i>Try Now
-        </a>
+
+    <div id="utilities" class="tab-content">
+      <div class="bot-row">
+        <div class="bot-item">
+          <h3>Auto Renamers</h3>
+          <p class="subheading">Specialized renaming engine engineered specifically for formatting and organizing Movies & Series.</p>
+          <a href="https://t.me/AutoRenamersBot" target="_blank" class="button bot" data-tooltip="Organize your media files">
+            <i class="fab fa-telegram-plane"></i>Try Now
+          </a>
+        </div>
+        
+        <div class="bot-item">
+          <h3>Digital Files Renamer</h3>
+          <p class="subheading">Alternative high-capacity renaming instance for general files and rapid processing tasks.</p>
+          <a href="https://t.me/digitalfilesrenamebot" target="_blank" class="button bot" data-tooltip="Backup renaming instance">
+            <i class="fab fa-telegram-plane"></i>Try Now
+          </a>
+        </div>
       </div>
     </div>
+
   </div>
 
   <div class="section">
@@ -510,11 +656,18 @@
       <a href="https://t.me/xspes" target="_blank" class="button contact">
         <i class="fab fa-telegram-plane"></i>Telegram Me
       </a>
-      <a href="https://wa.me/254708583813?text=Hey%20Nam!%20Just%20landed%20on%20fastwhale.site%20and%20had%20to%20say%20%E2%80%94%20slick%20setup.%20Got%20a%20minute%3F" target="_blank" class="button whatsapp">
-        <i class="fab fa-whatsapp"></i>WhatsApp
-      </a>
     </div>
-    <p style="margin-top: 1rem;">Email: <a href="mailto:ping@fastwhale.site" class="email-link">ping@fastwhale.site</a></p>
+    
+    <p style="margin-top: 1.5rem; margin-bottom: 0.5rem;">Email me directly:</p>
+    <div class="email-wrapper" onclick="copyEmail()">
+      <i class="far fa-envelope"></i>
+      <span class="email-link" id="emailText">ping@fastwhale.site</span>
+    </div>
+
+    <p style="margin-top: 1.5rem; margin-bottom: 0.5rem;">Prefer meta chaos? Hit me on WhatsApp:</p>
+    <a href="https://wa.me/254708583813?text=Hey%20Nam!%20Just%20landed%20on%20fastwhale.site%20and%20had%20to%20say%20%E2%80%94%20slick%20setup.%20Got%20a%20minute%3F" target="_blank" class="button whatsapp">
+      <i class="fab fa-whatsapp"></i>WhatsApp Me
+    </a>
   </div>
 
 <footer>
@@ -522,6 +675,8 @@
   <strong>fastwhale.site</strong> &mdash; <span id="year"></span>
   <div class="footer-quote" id="footerQuote"></div>
 </footer>
+
+<div id="toast"><i class="fas fa-check-circle" style="color: #00c853; margin-right: 8px;"></i> Email copied to clipboard!</div>
 
 <button id="backToTop" aria-label="Back to top">
   <i class="fas fa-chevron-up"></i>
@@ -540,6 +695,33 @@
     body.classList.toggle('dark');
     body.classList.toggle('light');
     toggleBtn.textContent = body.classList.contains('dark') ? '☀️' : '🌙';
+  }
+
+  // Tabs Logic
+  function openTab(evt, tabName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tab-content");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].classList.remove("active");
+    }
+    tablinks = document.getElementsByClassName("tab-btn");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].classList.remove("active");
+    }
+    document.getElementById(tabName).classList.add("active");
+    evt.currentTarget.classList.add("active");
+  }
+
+  // Copy Email Logic
+  function copyEmail() {
+    const email = document.getElementById('emailText').innerText;
+    navigator.clipboard.writeText(email).then(() => {
+      const toast = document.getElementById("toast");
+      toast.className = "show";
+      setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+    }).catch(err => {
+      console.error('Failed to copy text: ', err);
+    });
   }
 
   // Set Year
