@@ -3,7 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FastWhale 🐋</title>
+  
+  <title>FastWhale 🐋 | Telegram Bot Architect</title>
+  <meta name="description" content="Builder, optimizer, and Telegram bot architect. Zero tolerance for fluff and full commitment to precision." />
+  <meta property="og:title" content="FastWhale 🐋 | Telegram Bot Architect" />
+  <meta property="og:description" content="Welcome to my corner of the internet. If it runs, I've patched it. If it breaks, I fix fast." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://fastwhale.site" />
+  <meta property="og:image" content="https://fastwhale.site/banner.jpg" />
+  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     html {
@@ -19,34 +27,17 @@
       --email-dark: #00e5ff;
       --primary: #6200ea;
       --primary-hover: #3700b3;
-    }
-
-    .section {
-      margin-bottom: 2rem;
-      padding: 1.5rem;
-      border-radius: 12px;
-      backdrop-filter: blur(10px);
-      animation: fadeInUp 0.6s ease-out;
-    }
-
-    /* Light mode card background + border + shadow */
-    body.light .section {
-      background: rgba(255, 255, 255, 0.7);
-      border: 1px solid rgba(0, 0, 0, 0.05);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    }
-
-    /* Dark mode card background */
-    body.dark .section {
-      background: rgba(255, 255, 255, 0.05);
+      --accent: #00c853;
+      --premium: #ffb300;
     }
 
     body {
-      font-family: system-ui, sans-serif;
-      max-width: 700px;
+      font-family: system-ui, -apple-system, sans-serif;
+      max-width: 750px;
       margin: auto;
       padding: 2rem;
       transition: background 0.3s ease, color 0.3s ease;
+      line-height: 1.6;
     }
 
     body.light {
@@ -59,44 +50,68 @@
       color: var(--text-dark);
     }
 
+    /* Upgraded Animated Gradient Title */
     h1 {
       margin-top: 1rem;
-      font-size: 2rem;
-      background: linear-gradient(90deg, #00c853, #6200ea);
+      font-size: 2.5rem;
+      font-weight: 800;
+    }
+    
+    .animated-title {
+      background: linear-gradient(270deg, #0070f3, #00c853, #6200ea, #0070f3);
+      background-size: 300% 300%;
       -webkit-background-clip: text;
       color: transparent;
+      animation: gradientFlow 6s ease infinite;
     }
 
-    h2, h3 {
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h2 {
       margin-top: 1rem;
+      font-size: 1.5rem;
+      border-bottom: 2px solid rgba(128, 128, 128, 0.2);
+      padding-bottom: 0.5rem;
+    }
+
+    h3 {
+      margin-top: 1rem;
+      font-size: 1.2rem;
     }
     
     .subheading {
-      font-size: 0.9rem;
-      opacity: 0.8;
+      font-size: 0.95rem;
+      opacity: 0.85;
       margin-top: 0.3rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .animated-title {
-      animation: blinkColors 2s infinite;
-    }
-
-    @keyframes blinkColors {
-      0%   { color: #0070f3; }
-      25%  { color: #00c853; }
-      50%  { color: #ff6d00; }
-      75%  { color: #6200ea; }
-      100% { color: #0070f3; }
+      margin-bottom: 0.8rem;
     }
 
     .section {
       margin-bottom: 2rem;
-      padding: 1.5rem;
+      padding: 1.8rem;
       border-radius: 12px;
-      background: rgba(255, 255, 255, 0.05);
       backdrop-filter: blur(10px);
       animation: fadeInUp 0.6s ease-out;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    body.light .section {
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    body.dark .section {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .section:hover {
+      transform: translateY(-2px);
     }
 
     @keyframes fadeInUp {
@@ -104,19 +119,115 @@
       100% { transform: translateY(0); opacity: 1; }
     }
 
-    .intro {
-      font-size: 1.1rem;
-      line-height: 1.6;
+    /* Skill Pills */
+    .skills-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 1rem;
+      margin-bottom: 1.5rem;
     }
-    
+
+    .skill-pill {
+      font-size: 0.8rem;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: rgba(128, 128, 128, 0.15);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* Buttons */
     .button-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 12px;
       margin-top: 0.5rem;
       margin-bottom: 1rem;
     }
     
+    .button {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      color: white;
+      position: relative;
+    }
+
+    .button i {
+      margin-right: 8px;
+      font-size: 1.1rem;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .button[data-tooltip]:hover::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: 130%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #222;
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 6px;
+      white-space: nowrap;
+      font-size: 0.85rem;
+      opacity: 0.95;
+      pointer-events: none;
+    }
+
+    .appstore { background-color: #0070f3; }
+    .appstore:hover { background-color: #0059c1; }
+    .apk { background-color: var(--accent); }
+    .apk:hover { background-color: #00943a; }
+    .github { background-color: #37474f; }
+    .github:hover { background-color: #263238; }
+    .bots-channel { background-color: #0088cc; }
+    .bots-channel:hover { background-color: #006da3; }
+    .bot { background-color: #00bcd4; }
+    .bot:hover { background-color: #0097a7; }
+    .contact { background-color: var(--primary); }
+    .contact:hover { background-color: var(--primary-hover); }
+    .whatsapp { background-color: #25D366; }
+    .whatsapp:hover { background-color: #1DA851; }
+    
+    .btn-premium {
+      background: linear-gradient(135deg, #ff9100, #ffb300);
+      color: #121212 !important;
+    }
+    .btn-premium:hover { background: linear-gradient(135deg, #e68300, #ffa000); }
+
+    /* Bot Layouts */
+    .bot-featured {
+      background: rgba(98, 0, 234, 0.05);
+      border: 1px solid rgba(98, 0, 234, 0.2);
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    body.dark .bot-featured {
+      background: rgba(98, 0, 234, 0.1);
+    }
+
+    .bot-featured::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 4px; height: 100%;
+      background: linear-gradient(to bottom, #0070f3, #6200ea);
+    }
+
     .bot-row {
       display: flex;
       flex-wrap: wrap;
@@ -126,141 +237,94 @@
     
     .bot-item {
       flex: 1;
-      min-width: 250px;
-      background: rgba(255, 255, 255, 0.05);
-      padding: 1rem;
+      min-width: 240px;
+      background: rgba(128, 128, 128, 0.05);
+      padding: 1.2rem;
       border-radius: 10px;
-      margin-bottom: 1rem;
+      border: 1px solid rgba(128, 128, 128, 0.1);
+    }
+
+    /* Badges */
+    .badges {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 0.8rem;
+    }
+
+    .badge {
+      font-size: 0.75rem;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
     
-    body.light .bot-item {
-      background: rgba(0, 0, 0, 0.03);
+    .badge.pro { background: #e3f2fd; color: #1565c0; }
+    .badge.heavy { background: #fce4ec; color: #c2185b; }
+    .badge.premium-tag { background: #fff8e1; color: #ff8f00; }
+    
+    body.dark .badge.pro { background: rgba(21, 101, 192, 0.3); color: #90caf9; }
+    body.dark .badge.heavy { background: rgba(194, 24, 91, 0.3); color: #f48fb1; }
+    body.dark .badge.premium-tag { background: rgba(255, 143, 0, 0.2); color: #ffe082; }
+
+    /* Tech Stack Grid */
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-top: 1rem;
     }
 
-    .button {
-      display: inline-block;
-      padding: 0.6rem 1.2rem;
-      font-size: 1rem;
-      font-weight: 500;
-      border-radius: 6px;
-      text-decoration: none;
-      transition: background 0.3s ease;
-      color: white;
-      position: relative;
-    }
-
-    .button[data-tooltip]:hover::after {
-      content: attr(data-tooltip);
-      position: absolute;
-      bottom: 120%;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #333;
-      color: #fff;
-      padding: 6px 10px;
-      border-radius: 6px;
-      white-space: nowrap;
-      font-size: 0.85rem;
-      opacity: 0.9;
-    }
-
-    .appstore { background-color: #0070f3; }
-    .appstore:hover { background-color: #0059c1; }
-
-    .apk { background-color: #00c853; }
-    .apk:hover { background-color: #00943a; }
-
-    .github {
-      background-color: #37474f;
-      animation: pulseGitHub 2s infinite;
-    }
-
-    .github:hover {
-      background-color: #263238;
-    }
-
-    .bots-channel {
-      background-color: #0088cc;
+    .tech-card {
+      background: rgba(128, 128, 128, 0.05);
+      padding: 1rem;
+      border-radius: 8px;
+      border: 1px solid rgba(128, 128, 128, 0.1);
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
     
-    .bots-channel:hover {
-      background-color: #006da3;
-    }
-    
-    .bot {
-      background-color: #00bcd4;
-    }
-
-    .bot:hover {
-      background-color: #0097a7;
-    }
-    
-    .contact {
-      background-color: #6200ea;
-    }
-
-    .contact:hover {
-      background-color: #3700b3;
-    }
-
-    /* WhatsApp button fix */
-    .whatsapp {
-      background-color: #25D366;
-    }
-
-    .whatsapp:hover {
-      background-color: #1DA851;
-    }
-
-    .github i,
-    .bots-channel i,
-    .bot i,
-    .contact i,
-    .whatsapp i {
-      margin-right: 8px;
-      vertical-align: middle;
-    }
-
-    @keyframes pulseGitHub {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
+    .tech-card i {
+      font-size: 1.5rem;
+      color: var(--primary);
     }
 
     .email-link {
       text-decoration: underline;
+      font-weight: 500;
       transition: color 0.3s ease;
     }
 
-    body.light .email-link {
-      color: var(--email-light);
-    }
+    body.light .email-link { color: var(--email-light); }
+    body.dark .email-link { color: var(--email-dark); }
+    .email-link:hover { opacity: 0.8; }
 
-    body.dark .email-link {
-      color: var(--email-dark);
-    }
-
-    .email-link:hover {
-      opacity: 0.8;
-    }
-
+    /* Controls */
     .toggle-btn {
       position: fixed;
-      top: 1rem;
-      right: 1rem;
-      background: none;
-      border: none;
-      font-size: 1.5rem;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: rgba(128, 128, 128, 0.1);
+      border: 1px solid rgba(128, 128, 128, 0.2);
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      font-size: 1.2rem;
       cursor: pointer;
-      transition: transform 0.3s ease;
+      backdrop-filter: blur(5px);
+      transition: all 0.3s ease;
       z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .toggle-btn:hover {
-      transform: rotate(20deg);
+      transform: rotate(20deg) scale(1.1);
     }
 
-    /* Professional Back to Top Button */
     #backToTop {
       position: fixed;
       bottom: 2rem;
@@ -272,56 +336,75 @@
       border: none;
       border-radius: 50%;
       cursor: pointer;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-      display: none;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       z-index: 999;
       transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
       opacity: 0;
+      visibility: hidden;
       transform: translateY(20px);
       font-size: 1.2rem;
     }
     
     #backToTop.show {
-      display: flex;
-      align-items: center;
-      justify-content: center;
       opacity: 1;
+      visibility: visible;
       transform: translateY(0);
     }
 
     #backToTop:hover {
       background: var(--primary-hover);
-      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
       transform: translateY(-3px);
     }
-    
-    #backToTop:active {
-      transform: translateY(0);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding-bottom: 2rem;
     }
 
     .footer-whale {
-      font-size: 1.5rem;
+      font-size: 2rem;
       margin-bottom: 0.5rem;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
     }
     
     .footer-quote {
-      margin-top: 0.5rem;
+      margin-top: 0.8rem;
       font-style: italic;
-      opacity: 0.8;
+      opacity: 0.7;
+      font-size: 0.9rem;
     }
   </style>
 </head>
 <body>
   <h1 class="animated-title">FastWhale 🐋</h1>
 
-  <button class="toggle-btn" onclick="toggleTheme()" id="themeToggle">🌙</button>
+  <button class="toggle-btn" onclick="toggleTheme()" id="themeToggle" aria-label="Toggle Dark/Light Mode">🌙</button>
 
   <div class="section intro">
     <p>Welcome to my corner of the internet! I'm Nam — Ads manager, a builder, optimizer, and Telegram bot architect with zero tolerance for fluff and full commitment to precision. If it runs, I've probably patched it. If it breaks, I fix fast.</p>
+    
+    <div class="skills-container">
+      <span class="skill-pill">Python</span>
+      <span class="skill-pill">Pyrogram</span>
+      <span class="skill-pill">Telethon</span>
+      <span class="skill-pill">Database Arch</span>
+      <span class="skill-pill">SysAdmin</span>
+    </div>
+
     <div class="button-row">
       <a href="https://github.com/yuIlariy" target="_blank" class="button github">
-        <i class="fab fa-github"></i>GitHub Profile
+        <i class="fab fa-github"></i>GitHub
       </a>
       <a href="https://t.me/OtherBs" target="_blank" class="button bots-channel" data-tooltip="My Telegram bots channel">
         <i class="fab fa-telegram-plane"></i>Bots Channel
@@ -330,70 +413,122 @@
   </div>
 
   <div class="section">
-    <h2>📢 My Telegram Channels</h2>
-
-    <h3>Main Channel</h3>
-    <p class="subheading">Your go-to source for latest app releases</p>
-    <a href="https://t.me/UnlimAPKS" target="_blank" class="button appstore" data-tooltip="Main channel for app releases">Visit Channel</a>
-
-    <h3>Secondary Channel</h3>
-    <p class="subheading">Premium APKs & mods for the savvy user</p>
-    <a href="https://t.me/UnlimAPKS" target="_blank" class="button apk" data-tooltip="Premium APKs and mods">APK Premiums</a>
-  </div>
-
-  <div class="section">
-    <h2>🤖 My Telegram Bots</h2>
+    <h2>🤖 Premium Telegram Bots</h2>
     
-    <h3>Auto Renamers</h3>
+    <div class="bot-featured">
+      <div class="badges">
+        <span class="badge pro">Flagship Bot</span>
+        <span class="badge heavy">2GB+ Support</span>
+        <span class="badge premium-tag">Cheap Premium</span>
+      </div>
+      <h3>Digital Auto Rename Bot</h3>
+      <p class="subheading">The ultimate file management powerhouse. Built with a robust worker-based architecture and advanced queue management. Seamlessly auto-renames massive 2GB+ files, tracks complex naming sequences, and processes at lightning speed.</p>
+      <p class="subheading"><em>Unlock unlimited power with an incredibly affordable premium tier designed for heavy users.</em></p>
+      <div class="button-row" style="margin-top: 1rem;">
+        <a href="https://t.me/DigitalAutoRenameBot" target="_blank" class="button btn-premium" data-tooltip="Start renaming heavy files automatically">
+          <i class="fas fa-rocket"></i>Launch Bot
+        </a>
+      </div>
+    </div>
+    
     <div class="bot-row">
       <div class="bot-item">
-        <h4>For General Files</h4>
-        <p class="subheading">Auto-renames general files in Telegram</p>
-        <a href="https://t.me/DigitalAutoRenameBot" target="_blank" class="button bot" data-tooltip="Auto-renames files in Telegram">
+        <h3>Auto Renamers</h3>
+        <p class="subheading">Specialized renaming engine engineered specifically for formatting and organizing Movies & Series.</p>
+        <a href="https://t.me/AutoRenamersBot" target="_blank" class="button bot" data-tooltip="Organize your media files">
           <i class="fab fa-telegram-plane"></i>Try Now
         </a>
       </div>
       
       <div class="bot-item">
-        <h4>For Movies & Series</h4>
-        <p class="subheading">Specialized renaming for media files</p>
-        <a href="https://t.me/AutoRenamersBot" target="_blank" class="button bot" data-tooltip="Rename movies and series">
+        <h3>Digital Files Renamer</h3>
+        <p class="subheading">Alternative high-capacity renaming instance for general files and rapid processing tasks.</p>
+        <a href="https://t.me/digitalfilesrenamebot" target="_blank" class="button bot" data-tooltip="Backup renaming instance">
           <i class="fab fa-telegram-plane"></i>Try Now
         </a>
       </div>
     </div>
-    
-    <h3>Digital Renamer Bot</h3>
-    <p class="subheading">2GB+ files rename support, premium option</p>
-    <a href="https://t.me/digitalfilesrenamebot" target="_blank" class="button bot" data-tooltip="Rename files automatically">
-      <i class="fab fa-telegram-plane"></i>Try Now
-    </a>
   </div>
 
   <div class="section">
-    <h2>📬 Contact Me</h2>
-    <p>Want collaboration or Have a project in mind? Let's chat!</p>
-    <a href="https://t.me/xspes" target="_blank" class="button contact">
-      <i class="fab fa-telegram-plane"></i>Send Message
-    </a><br>
-    <p>Email: <a href="mailto:ping@fastwhale.site" class="email-link">ping@fastwhale.site</a></p>
-    <p>Prefer meta chaos? Hit me on WhatsApp</p>
-    <a href="https://wa.me/254708583813?text=Hey%20Nam!%20Just%20landed%20on%20fastwhale.site%20and%20had%20to%20say%20%E2%80%94%20slick%20setup.%20Got%20a%20minute%3F" target="_blank" class="button whatsapp">
-      <i class="fab fa-whatsapp"></i>WhatsApp Me
-    </a>
+    <h2>🏗️ Tech Stack & Infrastructure</h2>
+    <p class="subheading">The tools and engines powering my deployments and bots.</p>
+    
+    <div class="tech-grid">
+      <div class="tech-card">
+        <i class="fab fa-python"></i>
+        <div>
+          <strong>Backend</strong>
+          <div style="font-size: 0.85rem; opacity: 0.8;">Python, Pyrogram</div>
+        </div>
+      </div>
+      <div class="tech-card">
+        <i class="fas fa-database"></i>
+        <div>
+          <strong>Databases</strong>
+          <div style="font-size: 0.85rem; opacity: 0.8;">MongoDB, Redis Cloud</div>
+        </div>
+      </div>
+      <div class="tech-card">
+        <i class="fas fa-server"></i>
+        <div>
+          <strong>Hosting</strong>
+          <div style="font-size: 0.85rem; opacity: 0.8;">Render, systemd Linux</div>
+        </div>
+      </div>
+      <div class="tech-card">
+        <i class="fas fa-network-wired"></i>
+        <div>
+          <strong>Networking</strong>
+          <div style="font-size: 0.85rem; opacity: 0.8;">MikroTik RouterOS</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>📢 App & Mod Channels</h2>
+    <div class="bot-row" style="margin-top: 0;">
+      <div class="bot-item" style="background: transparent; border: none; padding: 0;">
+        <h3>Main App Hub</h3>
+        <p class="subheading">Your go-to source for the latest stable app releases and updates.</p>
+        <a href="https://t.me/UnlimAPKS" target="_blank" class="button appstore">Visit Channel</a>
+      </div>
+      <div class="bot-item" style="background: transparent; border: none; padding: 0;">
+        <h3>Premium Mods</h3>
+        <p class="subheading">Unlocked APKs, custom ROM updates, and mods for the savvy user.</p>
+        <a href="https://t.me/UnlimAPKS" target="_blank" class="button apk">APK Premiums</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>📬 Contact & Collab</h2>
+    <p>Have a project in mind, need bot architecture, or want to discuss server setups? Let's chat.</p>
+    
+    <div class="button-row">
+      <a href="https://t.me/xspes" target="_blank" class="button contact">
+        <i class="fab fa-telegram-plane"></i>Telegram Me
+      </a>
+      <a href="https://wa.me/254708583813?text=Hey%20Nam!%20Just%20landed%20on%20fastwhale.site%20and%20had%20to%20say%20%E2%80%94%20slick%20setup.%20Got%20a%20minute%3F" target="_blank" class="button whatsapp">
+        <i class="fab fa-whatsapp"></i>WhatsApp
+      </a>
+    </div>
+    <p style="margin-top: 1rem;">Email: <a href="mailto:ping@fastwhale.site" class="email-link">ping@fastwhale.site</a></p>
   </div>
 
 <footer>
   <div class="footer-whale">🐳</div>
-  fastwhale.site &mdash; <span id="year"></span>
+  <strong>fastwhale.site</strong> &mdash; <span id="year"></span>
   <div class="footer-quote" id="footerQuote"></div>
 </footer>
 
-<button id="backToTop" title="Back to top">
+<button id="backToTop" aria-label="Back to top">
   <i class="fas fa-chevron-up"></i>
 </button>
 
 <script>
+  // Theme Toggle Logic
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   const body = document.body;
   const toggleBtn = document.getElementById('themeToggle');
@@ -407,8 +542,10 @@
     toggleBtn.textContent = body.classList.contains('dark') ? '☀️' : '🌙';
   }
 
+  // Set Year
   document.getElementById('year').textContent = new Date().getFullYear();
 
+  // Dynamic Quotes
   const quotes = [
     "FastWhale: Where bots don't sleep and DNS never fails.",
     "Built fast. Runs faster. Breaks never.",
@@ -416,15 +553,14 @@
     "If it's patched, it's probably Nam.",
     "Minimal by design, maximal by impact."
   ];
-  document.getElementById('footerQuote').textContent =
+  document.getElementById('footerQuote').textContent = 
     quotes[Math.floor(Math.random() * quotes.length)];
 
-  // Enhanced back to top functionality
+  // Back to Top functionality
   const backToTopBtn = document.getElementById('backToTop');
   
   window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY;
-    if (scrollY > 300) {
+    if (window.scrollY > 300) {
       backToTopBtn.classList.add('show');
     } else {
       backToTopBtn.classList.remove('show');
@@ -437,4 +573,3 @@
 </script>
 </body>
 </html>
-
