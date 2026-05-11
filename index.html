@@ -114,7 +114,7 @@
 
     /* Skills */
     .skills-container { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 0.8rem; margin-bottom: 1.2rem; }
-    .skill-pill { font-size: 0.75rem; padding: 3px 8px; border-radius: 15px; background: rgba(128, 128, 128, 0.12); font-weight: 600; }
+    .skill-pill { font-size: 0.75rem; padding: 3px 8px; border-radius: 15px; background: rgba(128, 128, 128, 0.12); font-weight: 600; cursor: default; }
 
     /* Buttons */
     .button-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 0.5rem; margin-bottom: 0.8rem; }
@@ -178,7 +178,9 @@
 
     /* Badges */
     .badges { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 0.6rem; }
-    .badge { font-size: 0.7rem; padding: 3px 6px; border-radius: 4px; font-weight: 700; text-transform: uppercase; white-space: nowrap; }
+    .badge { display: inline-flex; align-items: center; gap: 4px; font-size: 0.7rem; padding: 3px 6px; border-radius: 4px; font-weight: 700; text-transform: uppercase; white-space: nowrap; }
+    .badge i { font-size: 0.75rem; }
+    
     .badge.pro { background: #e3f2fd; color: #1565c0; } .badge.heavy { background: #fce4ec; color: #c2185b; } .badge.premium-tag { background: #fff8e1; color: #ff8f00; }
     .badge.utility { background: #e0f7fa; color: #00838f; } .badge.media { background: #f3e5f5; color: #6a1b9a; }
     
@@ -201,11 +203,11 @@
     details p { margin: 0; padding: 0 12px 12px 12px; font-size: 0.85rem; opacity: 0.85; animation: slideDown 0.2s ease; }
     @keyframes slideDown { from { opacity: 0; transform: translateY(-3px); } to { opacity: 0.85; transform: translateY(0); } }
 
-    /* Crypto & Tip Jar */
-    .crypto-box { background: rgba(128, 128, 128, 0.05); border: 1px solid rgba(128, 128, 128, 0.1); padding: 10px 12px; border-radius: 6px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: all 0.2s ease; word-break: break-all; }
+    /* Crypto & Tip Jar - TEXT SELECTION DISABLED FOR MOBILE TAPPING */
+    .crypto-box { background: rgba(128, 128, 128, 0.05); border: 1px solid rgba(128, 128, 128, 0.1); padding: 10px 12px; border-radius: 6px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: all 0.2s ease; word-break: break-all; user-select: none; -webkit-user-select: none; }
     .crypto-box:hover { background: rgba(128, 128, 128, 0.1); transform: scale(1.01); border-color: var(--primary); }
     .crypto-details { flex: 1; margin-right: 12px; }
-    .crypto-label { font-weight: 700; font-size: 0.85rem; margin-bottom: 2px; display: flex; align-items: center; color: var(--primary); }
+    .crypto-label { font-weight: 700; font-size: 0.85rem; margin-bottom: 2px; color: var(--primary); display: flex; align-items: center; gap: 6px; }
     body.dark .crypto-label { color: #a166ff; }
     .crypto-address { font-family: monospace; font-size: 0.8rem; opacity: 0.9; }
     .crypto-icon { font-size: 1.1rem; opacity: 0.5; transition: color 0.2s; }
@@ -232,8 +234,10 @@
     #toast { visibility: hidden; min-width: 180px; background-color: #333; color: #fff; text-align: center; border-radius: 6px; padding: 10px; position: fixed; z-index: 1001; left: 50%; bottom: 30px; transform: translateX(-50%); font-size: 0.85rem; box-shadow: 0 4px 10px rgba(0,0,0,0.3); opacity: 0; transition: opacity 0.3s, bottom 0.3s; }
     #toast.show { visibility: visible; opacity: 1; bottom: 40px; }
     
-    .email-link { text-decoration: underline; font-weight: 500; transition: color 0.2s ease; cursor: pointer; }
+    /* EMAIL LINK - TEXT SELECTION DISABLED FOR MOBILE TAPPING */
+    .email-link { text-decoration: underline; font-weight: 500; transition: color 0.2s ease; cursor: pointer; user-select: none; -webkit-user-select: none; }
     body.light .email-link { color: var(--email-light); } body.dark .email-link { color: var(--email-dark); }
+    .email-link:hover { color: var(--primary); }
     
     #backToTop { position: fixed; bottom: 1.5rem; right: 1.5rem; width: 45px; height: 45px; background: var(--primary); color: white; border: none; border-radius: 50%; cursor: pointer; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); display: flex; align-items: center; justify-content: center; z-index: 999; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); opacity: 0; visibility: hidden; transform: translateY(15px); font-size: 1.1rem; }
     #backToTop.show { opacity: 1; visibility: visible; transform: translateY(0); }
@@ -322,7 +326,7 @@
       </div>
 
       <div class="faq-container">
-        <h4><i class="fas fa-clipboard-question icon-accent" style="font-size: 1rem; margin-right: 6px;"></i> Flagship FAQ</h4>
+        <h4><i class="fas fa-clipboard-question icon-accent"></i> Flagship FAQ</h4>
         <details>
           <summary>What is the max file size for the auto-renamer?</summary>
           <p>The Digital Auto Rename Bot easily handles files over 2GB without breaking a sweat, ensuring even the heaviest media files are processed perfectly.</p>
@@ -370,7 +374,7 @@
       </div>
 
       <div class="faq-container">
-        <h4><i class="fas fa-clipboard-question icon-accent" style="font-size: 1rem; margin-right: 6px;"></i> Utilities FAQ</h4>
+        <h4><i class="fas fa-clipboard-question icon-accent"></i> Utilities FAQ</h4>
         <details>
           <summary>What file types do these utility bots support?</summary>
           <p>They support virtually all Telegram-allowed file types. The <em>Auto Renamers</em> bot is specifically tuned for `.mkv`, `.mp4`, and other video formats, while the <em>Digital Files Renamer</em> handles all formats like `.zip`, `.pdf`, and `.rar` effortlessly.</p>
@@ -414,7 +418,7 @@
     
     <div class="crypto-box" onclick="copyText('0x3374677728e264dc0e006821dea242c4424766f1', 'BEP20 Address copied!')">
       <div class="crypto-details">
-        <div class="crypto-label"><i class="fas fa-wallet icon-accent"></i> USDT (BEP20)</div>
+        <div class="crypto-label"><i class="fas fa-wallet"></i> USDT (BEP20)</div>
         <div class="crypto-address">0x3374677728e264dc0e006821dea242c4424766f1</div>
       </div>
       <i class="far fa-copy crypto-icon"></i>
@@ -422,7 +426,7 @@
 
     <div class="crypto-box" onclick="copyText('TRUfcJwrPWb3q5wbETJZDQuQY3WZQbKDGg', 'TRC20 Address copied!')">
       <div class="crypto-details">
-        <div class="crypto-label"><i class="fas fa-coins icon-accent"></i> USDT (TRC20)</div>
+        <div class="crypto-label"><i class="fas fa-coins"></i> USDT (TRC20)</div>
         <div class="crypto-address">TRUfcJwrPWb3q5wbETJZDQuQY3WZQbKDGg</div>
       </div>
       <i class="far fa-copy crypto-icon"></i>
@@ -430,7 +434,7 @@
 
     <div class="crypto-box" onclick="copyText('734131187', 'Binance ID copied!')">
       <div class="crypto-details">
-        <div class="crypto-label"><i class="fas fa-qrcode icon-accent"></i> Binance Pay ID</div>
+        <div class="crypto-label"><i class="fas fa-qrcode"></i> Binance Pay ID</div>
         <div class="crypto-address">734131187</div>
       </div>
       <i class="far fa-copy crypto-icon"></i>
@@ -443,7 +447,9 @@
       
       <div class="bot-item channel-app">
         <div class="badges">
-          <span class="badge" style="background: rgba(0, 112, 243, 0.15); color: #0070f3;">Verified</span>
+          <span class="badge" style="background: rgba(0, 112, 243, 0.15); color: #0070f3;">
+            <i class="fab fa-google-play"></i> Verified
+          </span>
         </div>
         <h3><i class="fab fa-android icon-accent"></i> Main App Hub</h3>
         <p class="subheading">Your go-to source for the latest stable app releases and reliable updates.</p>
@@ -454,7 +460,9 @@
 
       <div class="bot-item channel-mod">
         <div class="badges">
-          <span class="badge" style="background: rgba(0, 200, 83, 0.15); color: #00c853;">Unlocked</span>
+          <span class="badge" style="background: rgba(0, 200, 83, 0.15); color: #00c853;">
+            <i class="fas fa-unlock-alt"></i> Unlocked
+          </span>
         </div>
         <h3><i class="fas fa-fire icon-accent"></i> Premium Mods</h3>
         <p class="subheading">Unlocked premium APKs and exclusive mods for the savvy Android user.</p>
