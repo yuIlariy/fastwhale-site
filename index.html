@@ -29,6 +29,14 @@
       --card-glow-dark: rgba(98, 0, 234, 0.4);
     }
 
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg-dark); }
+    ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--primary-hover); }
+    
+    body.light ::-webkit-scrollbar-track { background: #e0e0e0; }
+
     body {
       font-family: system-ui, -apple-system, sans-serif;
       max-width: 750px;
@@ -42,13 +50,20 @@
     body.light { background: var(--bg-light); color: var(--text-light); }
     body.dark { background: var(--bg-dark); color: var(--text-dark); }
 
+    /* Boot Screen Loading Overlay */
+    #boot-screen {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      background: #050505; z-index: 9999; display: flex; flex-direction: column;
+      justify-content: flex-end; padding: 2rem; font-family: 'Courier New', Courier, monospace;
+      color: #00ff00; font-size: 0.9rem; transition: opacity 0.5s ease, visibility 0.5s;
+    }
+    .boot-line { margin: 4px 0; opacity: 0; animation: typeLine 0.1s forwards; }
+    @keyframes typeLine { to { opacity: 1; } }
+
     /* Particles Background */
     #particles-js {
-      position: fixed;
-      width: 100%; height: 100%;
-      top: 0; left: 0;
-      z-index: -1;
-      pointer-events: none;
+      position: fixed; width: 100%; height: 100%; top: 0; left: 0;
+      z-index: -1; pointer-events: none;
     }
 
     /* Top Bar & Status */
@@ -107,8 +122,14 @@
     .bot { background-color: #00bcd4; } .bot:hover { background-color: #0097a7; }
     .contact { background-color: var(--primary); } .contact:hover { background-color: var(--primary-hover); }
     .whatsapp { background-color: #25D366; } .whatsapp:hover { background-color: #1DA851; }
-    .btn-premium { background: linear-gradient(135deg, #ff9100, #ffb300); color: #121212 !important; }
-    .btn-premium:hover { background: linear-gradient(135deg, #e68300, #ffa000); box-shadow: 0 4px 15px rgba(255, 179, 0, 0.4); }
+    
+    .btn-premium { background: linear-gradient(135deg, #ff9100, #ffb300); color: #121212 !important; animation: btnGlow 3s infinite alternate; }
+    .btn-premium:hover { background: linear-gradient(135deg, #e68300, #ffa000); box-shadow: 0 4px 20px rgba(255, 179, 0, 0.5); }
+
+    @keyframes btnGlow {
+      0% { box-shadow: 0 0 5px rgba(255, 179, 0, 0.2); }
+      100% { box-shadow: 0 0 15px rgba(255, 179, 0, 0.6); }
+    }
 
     /* Tabs */
     .tabs-header { display: flex; gap: 15px; margin-bottom: 1.5rem; border-bottom: 2px solid rgba(128, 128, 128, 0.1); overflow-x: auto; padding-bottom: 5px; -ms-overflow-style: none; scrollbar-width: none; }
@@ -125,7 +146,7 @@
     .bot-featured, .bot-item {
       background: rgba(128, 128, 128, 0.05);
       border: 1px solid rgba(128, 128, 128, 0.1);
-      padding: 1.5rem;
+      padding: 1.5rem; /* Consistent padding prevents overlap */
       border-radius: 12px;
       position: relative;
       overflow: hidden;
@@ -139,6 +160,10 @@
     .bot-featured::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(to bottom, #0070f3, #6200ea); }
     .bot-item::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(to bottom, #00bcd4, #00c853); opacity: 0.7; }
     
+    /* Custom Colors for App & Mod Channels */
+    .channel-app::before { background: linear-gradient(to bottom, #0070f3, #00bcd4); opacity: 1; }
+    .channel-mod::before { background: linear-gradient(to bottom, #00c853, #b2ff59); opacity: 1; }
+
     .bot-featured:hover { transform: translateY(-4px); box-shadow: 0 10px 25px var(--card-glow-light); border-color: rgba(98, 0, 234, 0.4); }
     .bot-item:hover { transform: translateY(-4px); box-shadow: 0 10px 25px rgba(0, 188, 212, 0.15); border-color: rgba(0, 188, 212, 0.3); }
     
@@ -157,7 +182,7 @@
     body.dark .badge.utility { background: rgba(0, 131, 143, 0.25); color: #80deea; }
     body.dark .badge.media { background: rgba(106, 27, 154, 0.25); color: #ce93d8; }
 
-    /* Tab-Specific FAQ Accordions */
+    /* FAQ Accordions */
     .faq-container { margin-top: 1.5rem; border-top: 1px dashed rgba(128, 128, 128, 0.3); padding-top: 1rem; }
     .faq-container h4 { margin-bottom: 1rem; display: flex; align-items: center; gap: 8px; opacity: 0.9; }
     
@@ -209,12 +234,16 @@
     #backToTop:hover { background: var(--primary-hover); transform: translateY(-3px); }
     
     footer { text-align: center; margin-top: 3rem; padding-bottom: 2rem; }
-    .footer-whale { font-size: 2rem; margin-bottom: 0.5rem; animation: float 3s ease-in-out infinite; }
-    @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
+    .footer-whale { font-size: 2.2rem; margin-bottom: 0.5rem; display: inline-block; animation: floatWhale 3s ease-in-out infinite; }
+    @keyframes floatWhale { 0% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-12px) rotate(5deg); } 100% { transform: translateY(0px) rotate(0deg); } }
     .footer-quote { margin-top: 0.8rem; font-style: italic; opacity: 0.7; font-size: 0.9rem; }
   </style>
 </head>
 <body>
+
+  <div id="boot-screen">
+    <div id="boot-text-container"></div>
+  </div>
 
   <div id="particles-js"></div>
 
@@ -308,7 +337,7 @@
       <div class="bot-item">
         <div class="badges">
           <span class="badge utility"><i class="fas fa-bolt"></i> High Capacity</span>
-          <span class="badge"><i class="fas fa-file-alt"></i> General Files</span>
+          <span class="badge" style="background: rgba(128,128,128,0.2); color: inherit;"><i class="fas fa-file-alt"></i> General Files</span>
         </div>
         <h3>Digital Files Renamer</h3>
         <p class="subheading">Your go-to solution for rapid, high-capacity file renaming. Whether it's documents, archives, or generic media, this backup instance processes bulk tasks efficiently without breaking a sweat.</p>
@@ -322,7 +351,7 @@
       <div class="bot-item">
         <div class="badges">
           <span class="badge media"><i class="fas fa-film"></i> Media Focus</span>
-          <span class="badge"><i class="fas fa-tv"></i> Series & Movies</span>
+          <span class="badge" style="background: rgba(128,128,128,0.2); color: inherit;"><i class="fas fa-tv"></i> Series & Movies</span>
         </div>
         <h3>Auto Renamers</h3>
         <p class="subheading">Engineered specifically for media hoarders. This specialized bot detects, formats, and organizes your Movies and TV Series with pristine naming conventions and clean metadata.</p>
@@ -403,17 +432,30 @@
 
   <div class="section">
     <h2>📢 App & Mod Channels</h2>
-    <div class="bot-row" style="margin-top: 0;">
-      <div class="bot-item" style="background: transparent; border: none; padding: 0;">
+    <div class="bot-row" style="margin-top: 1rem;">
+      
+      <div class="bot-item channel-app">
+        <div class="badges">
+          <span class="badge" style="background: rgba(0, 112, 243, 0.15); color: #0070f3;"><i class="fab fa-google-play"></i> Verified</span>
+        </div>
         <h3>Main App Hub</h3>
-        <p class="subheading">Your go-to source for the latest stable app releases and updates.</p>
-        <a href="https://t.me/UnlimAPKS" target="_blank" class="button appstore">Visit Channel</a>
+        <p class="subheading">Your go-to source for the latest stable app releases and reliable updates.</p>
+        <div class="button-row" style="margin-top: 1rem;">
+          <a href="https://t.me/UnlimAPKS" target="_blank" class="button appstore">Visit Channel</a>
+        </div>
       </div>
-      <div class="bot-item" style="background: transparent; border: none; padding: 0;">
+
+      <div class="bot-item channel-mod">
+        <div class="badges">
+          <span class="badge" style="background: rgba(0, 200, 83, 0.15); color: #00c853;"><i class="fas fa-unlock-alt"></i> Unlocked</span>
+        </div>
         <h3>Premium Mods</h3>
-        <p class="subheading">Unlocked APKs and mods for the savvy user.</p>
-        <a href="https://t.me/UnlimAPKS" target="_blank" class="button apk">APK Premiums</a>
+        <p class="subheading">Unlocked premium APKs and exclusive mods for the savvy Android user. No fluff, just the good stuff.</p>
+        <div class="button-row" style="margin-top: 1rem;">
+          <a href="https://t.me/UnlimAPKS" target="_blank" class="button apk">APK Premiums</a>
+        </div>
       </div>
+
     </div>
   </div>
 
@@ -440,7 +482,7 @@
   </div>
 
 <footer>
-  <div class="footer-whale">🐳</div>
+  <div class="footer-whale">🐳</div><br>
   <strong>fastwhale.site</strong> &mdash; <span id="year"></span>
   <div class="footer-quote" id="footerQuote"></div>
 </footer>
@@ -470,6 +512,40 @@
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
 <script>
+  // Boot Screen Logic
+  document.addEventListener("DOMContentLoaded", () => {
+    const bootContainer = document.getElementById('boot-text-container');
+    const bootScreen = document.getElementById('boot-screen');
+    const lines = [
+      "[ OK ] Booting FastWhale OS kernel...",
+      "[ OK ] Mounting MongoDB distributed clusters...",
+      "[ OK ] Initializing Pyrogram async workers...",
+      "[ OK ] Verifying systemd bot services...",
+      "[ OK ] Establishing secure connection...",
+      "> Access Granted. Welcome, Nam."
+    ];
+    
+    let delay = 100;
+    lines.forEach((line, index) => {
+      setTimeout(() => {
+        const div = document.createElement('div');
+        div.className = 'boot-line';
+        div.textContent = line;
+        bootContainer.appendChild(div);
+        
+        // On the very last line, trigger the fade out
+        if(index === lines.length - 1) {
+          setTimeout(() => {
+            bootScreen.style.opacity = '0';
+            setTimeout(() => { bootScreen.style.visibility = 'hidden'; }, 500);
+          }, 800);
+        }
+      }, delay);
+      // Randomize the typing delay to make it look like real booting
+      delay += Math.floor(Math.random() * 200) + 150; 
+    });
+  });
+
   // Initialize Particles Background
   particlesJS("particles-js", {
     "particles": {
