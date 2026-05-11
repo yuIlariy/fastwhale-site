@@ -204,17 +204,17 @@
     body.dark .badge.utility { background: rgba(0, 131, 143, 0.25); color: #80deea; }
     body.dark .badge.media { background: rgba(106, 27, 154, 0.25); color: #ce93d8; }
 
-    /* FAQ Accordions */
+    /* FAQ Accordions - SPACING REVERTED */
     .faq-container { margin-top: 2rem; border-top: 1px dashed rgba(128, 128, 128, 0.3); padding-top: 1.5rem; }
     .faq-container h4 { margin-bottom: 1rem; display: flex; align-items: center; gap: 8px; opacity: 0.9; font-size: 1.1rem; }
     
-    details { background: rgba(128, 128, 128, 0.03); border: 1px solid rgba(128, 128, 128, 0.1); border-radius: 10px; margin-bottom: 10px; transition: background 0.3s; }
+    details { background: rgba(128, 128, 128, 0.03); border: 1px solid rgba(128, 128, 128, 0.1); border-radius: 8px; margin-bottom: 10px; transition: background 0.3s; }
     details:hover { background: rgba(128, 128, 128, 0.08); }
-    summary { font-weight: 700; cursor: pointer; outline: none; list-style: none; position: relative; padding: 15px; padding-right: 40px; }
+    summary { font-weight: 600; cursor: pointer; outline: none; list-style: none; position: relative; padding: 12px 15px; padding-right: 35px; line-height: 1.4; }
     summary::-webkit-details-marker { display: none; }
     summary::after { content: '\f078'; font-family: 'Font Awesome 6 Free'; font-weight: 900; position: absolute; right: 15px; top: 50%; transform: translateY(-50%); font-size: 0.9rem; transition: transform 0.3s ease; opacity: 0.7; color: var(--primary); }
     details[open] summary::after { transform: translateY(-50%) rotate(180deg); }
-    details p { margin: 0; padding: 0 15px 15px 15px; font-size: 0.95rem; opacity: 0.85; animation: slideDown 0.3s ease; line-height: 1.6; }
+    details p { margin: 0; padding: 0 15px 15px 15px; font-size: 0.95rem; opacity: 0.85; animation: slideDown 0.3s ease; }
     @keyframes slideDown { from { opacity: 0; transform: translateY(-5px); } to { opacity: 0.85; transform: translateY(0); } }
 
     /* Crypto & Tip Jar */
