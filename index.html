@@ -101,7 +101,7 @@
     .ticker__item { display: inline-block; padding: 0 1.5rem; font-size: 0.8rem; font-family: monospace; color: var(--primary); font-weight: 600; }
     @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
 
-    /* Typography & Headers */
+    /* Animated Gradient Title */
     h1 { margin-top: 0.8rem; font-size: 2.2rem; font-weight: 800; cursor: default; }
     .animated-title { background: linear-gradient(270deg, #58a6ff, #3fb950, #8b5cf6, #58a6ff); background-size: 300% 300%; -webkit-background-clip: text; color: transparent; animation: gradientFlow 6s ease infinite; transition: transform 0.3s ease; display: inline-block; }
     .animated-title:hover { transform: scale(1.02); }
@@ -238,6 +238,14 @@
 </head>
 <body>
 
+  <script>
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.body.classList.add('dark');
+    } else {
+      document.body.classList.add('light');
+    }
+  </script>
+
   <div id="boot-screen">
     <div id="boot-text-container"></div>
   </div>
@@ -251,7 +259,7 @@
     </div>
     <div class="top-controls">
       <button class="term-btn" onclick="openTerminal()" aria-label="Open Terminal"><i class="fas fa-terminal"></i></button>
-      <button class="toggle-btn" onclick="toggleTheme()" id="themeToggle" aria-label="Toggle Dark/Light Mode">🌙</button>
+      <button class="toggle-btn" onclick="toggleTheme()" id="themeToggle" aria-label="Toggle Dark/Light Mode"></button>
     </div>
   </div>
 
@@ -522,6 +530,10 @@
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
 <script>
+  // Setup Theme Button Before Rendering Logic
+  const toggleBtn = document.getElementById('themeToggle');
+  toggleBtn.innerHTML = document.body.classList.contains('dark') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+
   // Boot Screen Logic
   document.addEventListener("DOMContentLoaded", () => {
     const bootContainer = document.getElementById('boot-text-container');
@@ -574,14 +586,8 @@
   });
 
   // Theme Toggle Logic
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const body = document.body;
-  const toggleBtn = document.getElementById('themeToggle');
-
-  body.classList.add(prefersDark ? 'dark' : 'light');
-  toggleBtn.innerHTML = prefersDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-
   function toggleTheme() {
+    const body = document.body;
     body.classList.toggle('dark');
     body.classList.toggle('light');
     toggleBtn.innerHTML = body.classList.contains('dark') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
