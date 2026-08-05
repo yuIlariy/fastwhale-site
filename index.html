@@ -3,14 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)" />
   
   <title>FastWhale 🐋 | Telegram Bot Architect</title>
   <meta name="description" content="Builder, optimizer, and Telegram bot architect. Zero tolerance for fluff and full commitment to precision." />
   <meta property="og:title" content="FastWhale 🐋 | Telegram Bot Architect" />
   <meta property="og:description" content="Welcome to my corner of the internet. If it runs, I've patched it. If it breaks, I fix fast." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://fastwhale.site" />
-  <meta property="og:image" content="https://fastwhale.site/banner.jpg" />
+  <meta property="og:url" content="https://fastwhale.app" />
+  <meta property="og:image" content="https://fastwhale.app/banner.jpg" />
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
@@ -288,10 +290,10 @@
     </div>
 
     <div class="button-row">
-      <a href="https://github.com/yuIlariy" target="_blank" class="button github">
+      <a href="https://github.com/yuIlariy" target="_blank" class="button github" aria-label="View GitHub">
         <i class="fab fa-github"></i>GitHub
       </a>
-      <a href="https://t.me/OtherBs" target="_blank" class="button bots-channel">
+      <a href="https://t.me/OtherBs" target="_blank" class="button bots-channel" aria-label="Join Bots Channel">
         <i class="fab fa-telegram-plane"></i>Bots Channel
       </a>
     </div>
@@ -300,12 +302,12 @@
   <div class="section">
     <h2><i class="fas fa-robot"></i> Telegram Bots</h2>
     
-    <div class="tabs-header">
-      <button class="tab-btn active" onclick="openTab(event, 'flagship')">Flagship Bot</button>
-      <button class="tab-btn" onclick="openTab(event, 'utilities')">Utility Bots</button>
+    <div class="tabs-header" role="tablist">
+      <button class="tab-btn active" onclick="openTab(event, 'flagship')" role="tab" aria-selected="true">Flagship Bot</button>
+      <button class="tab-btn" onclick="openTab(event, 'utilities')" role="tab" aria-selected="false">Utility Bots</button>
     </div>
 
-    <div id="flagship" class="tab-content active">
+    <div id="flagship" class="tab-content active" role="tabpanel">
       <div class="bot-featured">
         <div class="badges">
           <span class="badge"><i class="fas fa-star" style="color: var(--primary);"></i> Flagship</span>
@@ -316,7 +318,7 @@
         <p class="subheading">The ultimate file management powerhouse. Built with a robust worker-based architecture and advanced queue management. Seamlessly auto-renames massive 2GB+ files, tracks complex naming sequences, and processes at lightning speed.</p>
         <p class="subheading"><em>Unlock unlimited power with an incredibly affordable premium tier designed for heavy users.</em></p>
         <div class="button-row">
-          <a href="https://t.me/DigitalAutoRenameBot" target="_blank" class="button btn-premium">
+          <a href="https://t.me/DigitalAutoRenameBot" target="_blank" class="button btn-premium" aria-label="Launch Digital Auto Rename Bot">
             <i class="fas fa-rocket"></i>Launch Bot
           </a>
         </div>
@@ -339,7 +341,7 @@
       </div>
     </div>
 
-    <div id="utilities" class="tab-content">
+    <div id="utilities" class="tab-content" role="tabpanel">
       
       <div class="bot-item">
         <div class="badges">
@@ -350,7 +352,7 @@
         <h3><i class="fas fa-server icon-accent"></i> Digital Files Renamer</h3>
         <p class="subheading">Your go-to solution for rapid, high-capacity file renaming. Whether it's documents, archives, or generic media, this backup instance handles 2GB+ files efficiently without breaking a sweat.</p>
         <div class="button-row">
-          <a href="https://t.me/digitalfilesrenamebot" target="_blank" class="button bot">
+          <a href="https://t.me/digitalfilesrenamebot" target="_blank" class="button bot" aria-label="Try Digital Files Renamer Bot">
             <i class="fab fa-telegram-plane"></i>Try Renamer
           </a>
         </div>
@@ -364,7 +366,7 @@
         <h3><i class="fas fa-clapperboard icon-accent"></i> Auto Renamers</h3>
         <p class="subheading">Engineered specifically for media hoarders. This specialized bot detects, formats, and organizes your Movies and TV Series with pristine naming conventions and clean metadata.</p>
         <div class="button-row">
-          <a href="https://t.me/AutoRenamersBot" target="_blank" class="button bot">
+          <a href="https://t.me/AutoRenamersBot" target="_blank" class="button bot" aria-label="Try Auto Renamers Bot">
             <i class="fab fa-telegram-plane"></i>Organize Media
           </a>
         </div>
@@ -425,7 +427,7 @@
     <h2><i class="fas fa-mug-hot"></i> Buy Me Coffee</h2>
     <p class="subheading">If my tools save you time, consider dropping a tip. It keeps the servers running, the code flowing, and the APIs paid for.</p>
     
-    <div class="crypto-box" onclick="copyText('0x3374677728e264dc0e006821dea242c4424766f1', 'BEP20 Address copied!')">
+    <div class="crypto-box" onclick="copyText('0x3374677728e264dc0e006821dea242c4424766f1', 'BEP20 Address copied!')" tabindex="0" aria-label="Copy BEP20 USDT Address">
       <div class="crypto-details">
         <div class="crypto-label"><i class="fas fa-wallet"></i> USDT (BEP20)</div>
         <div class="crypto-address">0x3374677728e264dc0e006821dea242c4424766f1</div>
@@ -433,7 +435,7 @@
       <i class="far fa-copy crypto-icon"></i>
     </div>
 
-    <div class="crypto-box" onclick="copyText('TRUfcJwrPWb3q5wbETJZDQuQY3WZQbKDGg', 'TRC20 Address copied!')">
+    <div class="crypto-box" onclick="copyText('TRUfcJwrPWb3q5wbETJZDQuQY3WZQbKDGg', 'TRC20 Address copied!')" tabindex="0" aria-label="Copy TRC20 USDT Address">
       <div class="crypto-details">
         <div class="crypto-label"><i class="fas fa-coins"></i> USDT (TRC20)</div>
         <div class="crypto-address">TRUfcJwrPWb3q5wbETJZDQuQY3WZQbKDGg</div>
@@ -441,7 +443,7 @@
       <i class="far fa-copy crypto-icon"></i>
     </div>
 
-    <div class="crypto-box" onclick="copyText('734131187', 'Binance ID copied!')">
+    <div class="crypto-box" onclick="copyText('734131187', 'Binance ID copied!')" tabindex="0" aria-label="Copy Binance Pay ID">
       <div class="crypto-details">
         <div class="crypto-label"><i class="fas fa-qrcode"></i> Binance Pay ID</div>
         <div class="crypto-address">734131187</div>
@@ -461,7 +463,7 @@
         <h3><i class="fab fa-android icon-accent"></i> Main App Hub</h3>
         <p class="subheading">Your go-to source for the latest stable app releases and reliable updates.</p>
         <div class="button-row">
-          <a href="https://t.me/UnlimAPKS" target="_blank" class="button appstore">Visit Channel</a>
+          <a href="https://t.me/UnlimAPKS" target="_blank" class="button appstore" aria-label="Visit App Hub Channel">Visit Channel</a>
         </div>
       </div>
 
@@ -472,7 +474,7 @@
         <h3><i class="fas fa-fire icon-accent"></i> Premium Mods</h3>
         <p class="subheading">Unlocked premium APKs and exclusive mods for the savvy Android user.</p>
         <div class="button-row">
-          <a href="https://t.me/UnlimAPKS" target="_blank" class="button apk">APK Premiums</a>
+          <a href="https://t.me/UnlimAPKS" target="_blank" class="button apk" aria-label="Visit Mod APK Channel">APK Premiums</a>
         </div>
       </div>
 
@@ -484,7 +486,7 @@
     <p class="subheading">Have a project in mind, need bot architecture, or want to discuss server setups? Let's chat.</p>
     
     <div class="button-row">
-      <a href="https://t.me/xspes" target="_blank" class="button contact">
+      <a href="https://t.me/xspes" target="_blank" class="button contact" aria-label="Message on Telegram">
         <i class="fab fa-telegram-plane"></i>Telegram Me
       </a>
     </div>
@@ -492,26 +494,26 @@
     <p style="margin-top: 1.2rem; margin-bottom: 0.4rem; font-weight: 600;">Email me directly:</p>
     <div>
       <i class="far fa-envelope" style="margin-right: 5px; color: var(--text-muted);"></i>
-      <span class="email-link" onclick="copyText('ping@fastwhale.site', 'Email copied!')">ping@fastwhale.site</span>
+      <span class="email-link" onclick="copyText('ping@fastwhale.app', 'Email copied!')" tabindex="0" aria-label="Copy Email Address">ping@fastwhale.app</span>
     </div>
 
     <p style="margin-top: 1.2rem; margin-bottom: 0.4rem; font-weight: 600;">Prefer meta chaos? Hit me on WhatsApp:</p>
-    <a href="https://wa.me/254708583813?text=Hey%20Nam!%20Just%20landed%20on%20fastwhale.site%20and%20had%20to%20say%20%E2%80%94%20slick%20setup.%20Got%20a%20minute%3F" target="_blank" class="button whatsapp">
+    <a href="https://wa.me/254708583813?text=Hey%20Nam!%20Just%20landed%20on%20fastwhale.app%20and%20had%20to%20say%20%E2%80%94%20slick%20setup.%20Got%20a%20minute%3F" target="_blank" class="button whatsapp" aria-label="Message on WhatsApp">
       <i class="fab fa-whatsapp"></i>WhatsApp Me
     </a>
   </div>
 
 <footer>
   <div class="footer-whale"><i class="fas fa-terminal"></i></div><br>
-  <strong>fastwhale.site</strong> &mdash; <span id="year"></span>
+  <strong>fastwhale.app</strong> &mdash; <span id="year"></span>
   <div class="footer-quote" id="footerQuote"></div>
 </footer>
 
-<div id="terminal-modal">
+<div id="terminal-modal" role="dialog" aria-modal="true" aria-label="Terminal Modal">
   <div class="terminal-window">
     <div class="terminal-header">
       <span>nam@fastwhale: ~</span>
-      <span class="term-close" onclick="closeTerminal()">&times;</span>
+      <span class="term-close" onclick="closeTerminal()" aria-label="Close Terminal">&times;</span>
     </div>
     <div class="terminal-body" id="term-body">
       <div>Welcome to FastWhale Server OS v1.0.</div>
@@ -519,17 +521,17 @@
       <div id="term-output"></div>
       <div class="terminal-input-line">
         <span class="term-prompt">nam@whale:~$</span>
-        <input type="text" id="term-input" autocomplete="off" spellcheck="false" autofocus>
+        <input type="text" id="term-input" autocomplete="off" spellcheck="false" autofocus aria-label="Terminal Input">
       </div>
     </div>
   </div>
 </div>
 
-<div id="toast"><i class="fas fa-check-circle" style="color: var(--accent-green); margin-right: 6px;"></i> <span id="toast-msg">Copied!</span></div>
+<div id="toast" role="alert" aria-live="assertive"><i class="fas fa-check-circle" style="color: var(--accent-green); margin-right: 6px;"></i> <span id="toast-msg">Copied!</span></div>
 
 <button id="backToTop" aria-label="Back to top"><i class="fas fa-chevron-up"></i></button>
 
-<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" onload="initParticles()"></script>
 
 <script>
   // Setup Theme Button Before Rendering Logic
@@ -568,24 +570,26 @@
     });
   });
 
-  // Initialize Particles Background
-  particlesJS("particles-js", {
-    "particles": {
-      "number": { "value": 35, "density": { "enable": true, "value_area": 800 } },
-      "color": { "value": "#8b5cf6" },
-      "shape": { "type": "circle" },
-      "opacity": { "value": 0.4, "random": false },
-      "size": { "value": 3, "random": true },
-      "line_linked": { "enable": true, "distance": 150, "color": "#8b5cf6", "opacity": 0.2, "width": 1 },
-      "move": { "enable": true, "speed": 1.5, "direction": "none", "random": true, "out_mode": "out" }
-    },
-    "interactivity": {
-      "detect_on": "canvas",
-      "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
-      "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.5 } } }
-    },
-    "retina_detect": true
-  });
+  // Initialize Particles Background (called once script has loaded)
+  function initParticles() {
+    particlesJS("particles-js", {
+      "particles": {
+        "number": { "value": 35, "density": { "enable": true, "value_area": 800 } },
+        "color": { "value": "#8b5cf6" },
+        "shape": { "type": "circle" },
+        "opacity": { "value": 0.4, "random": false },
+        "size": { "value": 3, "random": true },
+        "line_linked": { "enable": true, "distance": 150, "color": "#8b5cf6", "opacity": 0.2, "width": 1 },
+        "move": { "enable": true, "speed": 1.5, "direction": "none", "random": true, "out_mode": "out" }
+      },
+      "interactivity": {
+        "detect_on": "canvas",
+        "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
+        "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.5 } } }
+      },
+      "retina_detect": true
+    });
+  }
 
   // Theme Toggle Logic
   function toggleTheme() {
@@ -603,13 +607,17 @@
   // Tabs Logic
   function openTab(evt, tabName) {
     let tabcontent = document.getElementsByClassName("tab-content");
-    for (let i = 0; i < tabcontent.length; i++) tabcontent[i].classList.remove("active");
+    for (let i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].classList.remove("active");
+      tabcontent[i].setAttribute('aria-selected', 'false');
+    }
     
     let tablinks = document.getElementsByClassName("tab-btn");
     for (let i = 0; i < tablinks.length; i++) tablinks[i].classList.remove("active");
     
     document.getElementById(tabName).classList.add("active");
     evt.currentTarget.classList.add("active");
+    evt.currentTarget.setAttribute('aria-selected', 'true');
   }
 
   // Universal Copy Text Logic
@@ -621,6 +629,16 @@
       setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 2500);
     }).catch(err => console.error('Failed to copy: ', err));
   }
+  
+  // Allow keyboard execution for copy commands
+  document.querySelectorAll('.crypto-box, .email-link').forEach(el => {
+    el.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        el.click();
+      }
+    })
+  });
 
   // Set Year & Quotes
   document.getElementById('year').textContent = new Date().getFullYear();
@@ -662,10 +680,13 @@
       let response = '';
       
       switch(command) {
-        case 'help': response = 'Available cmds: whoami, ping, stack, clear, root'; break;
+        case 'help': response = 'Available cmds: whoami, ping, stack, date, repo, clear, root'; break;
         case 'whoami': response = 'Nam. Ads manager, builder, optimizer, bot architect.'; break;
         case 'ping': response = 'Pong! All nodes responding at 12ms. Status: GREEN.'; break;
         case 'stack': response = 'Python, Pyrogram, MongoDB, Redis, systemd, MikroTik RouterOS'; break;
+        case 'date': response = new Date().toString(); break;
+        case 'repo': response = 'Fetching source from GitHub... [Access Denied] Check out https://github.com/yuIlariy instead.'; break;
+        case 'sudo': response = 'User "nam" is not in the sudoers file. This incident will be reported.'; break;
         case 'root': response = 'Access denied. Nice try though.'; break;
         case 'clear': termOutput.innerHTML = ''; termInput.value = ''; return;
         case '': break;
