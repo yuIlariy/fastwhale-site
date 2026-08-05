@@ -680,7 +680,7 @@
       let response = '';
       
       switch(command) {
-        case 'help': response = 'Available cmds: whoami, ping, stack, date, repo, clear, root'; break;
+        case 'help': response = 'Available cmds: whoami, ping, stack, date, repo, clear, exit, root'; break;
         case 'whoami': response = 'Nam. Ads manager, builder, optimizer, bot architect.'; break;
         case 'ping': response = 'Pong! All nodes responding at 12ms. Status: GREEN.'; break;
         case 'stack': response = 'Python, Pyrogram, MongoDB, Redis, systemd, MikroTik RouterOS'; break;
@@ -689,6 +689,7 @@
         case 'sudo': response = 'User "nam" is not in the sudoers file. This incident will be reported.'; break;
         case 'root': response = 'Access denied. Nice try though.'; break;
         case 'clear': termOutput.innerHTML = ''; termInput.value = ''; return;
+        case 'exit': closeTerminal(); termInput.value = ''; return;
         case '': break;
         default: response = `bash: ${command}: command not found`;
       }
