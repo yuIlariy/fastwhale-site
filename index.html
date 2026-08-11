@@ -1,4 +1,511 @@
-eta chaos? Hit me on WhatsApp:</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)" />
+  
+  <title>FastWhale 🐋 | Telegram Bot Architect</title>
+  <meta name="description" content="Builder, optimizer, and Telegram bot architect. Zero tolerance for fluff and full commitment to precision." />
+  <meta property="og:title" content="FastWhale 🐋 | Telegram Bot Architect" />
+  <meta property="og:description" content="Welcome to my corner of the internet. If it runs, I've patched it. If it breaks, I fix fast." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://fastwhale.app" />
+  <meta property="og:image" content="https://fastwhale.app/banner.jpg" />
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Modern Typography Setup -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  
+  <script>
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.add('light');
+    }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    
+    html { scroll-behavior: smooth; }
+
+    /* Ultra-Modern Theme Variables - SOLID BACKGROUNDS FOR READABILITY */
+    :root {
+      /* Light Mode */
+      --bg-base: #f1f5f9;
+      --bg-glass: #ffffff;
+      --bg-card: #ffffff;
+      --bg-hover: #f8fafc;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --border-color: #e2e8f0;
+      --border-glass: #e2e8f0;
+      --primary: #6366f1;
+      --primary-hover: #4f46e5;
+      --accent-green: #10b981;
+      --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+      --card-glow: 0 8px 25px rgba(99, 102, 241, 0.15);
+    }
+
+    html.dark {
+      /* Dark Mode */
+      --bg-base: #0d1117;
+      --bg-glass: #161b22;
+      --bg-card: #161b22;
+      --bg-hover: #21262d;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: #30363d;
+      --border-glass: #30363d;
+      --primary: #8b5cf6;
+      --primary-hover: #a78bfa;
+      --accent-green: #34d399;
+      --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      --card-glow: 0 8px 25px rgba(139, 92, 246, 0.2);
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-base); }
+    ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 99px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+    
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      max-width: 750px;
+      margin: auto;
+      padding: 1.2rem; /* Reverted to tight spacing */
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      transition: background-color 0.4s ease, color 0.4s ease;
+      line-height: 1.6;
+      position: relative;
+    }
+
+    /* Boot Screen Loading Overlay */
+    #boot-screen {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      background: #020617; z-index: 9999; display: flex; flex-direction: column;
+      justify-content: flex-end; padding: 1.5rem; font-family: 'JetBrains Mono', monospace;
+      color: #34d399; font-size: 0.85rem; transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.5s;
+    }
+    .boot-line { margin: 3px 0; opacity: 0; animation: typeLine 0.1s forwards; }
+    @keyframes typeLine { to { opacity: 1; } }
+
+    /* Particles Background */
+    #particles-js { position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: -1; pointer-events: none; }
+
+    /* Top Bar & Status */
+    .top-bar { display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem; }
+    .status-indicator { display: inline-flex; align-items: center; gap: 6px; font-size: 0.8rem; font-weight: 700; background: rgba(52, 211, 153, 0.1); color: var(--accent-green); padding: 4px 10px; border-radius: 99px; border: 1px solid rgba(52, 211, 153, 0.2); }
+    .pulse-dot { width: 6px; height: 6px; background-color: var(--accent-green); border-radius: 50%; box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7); animation: pulse 2s infinite; }
+
+    @keyframes pulse { 0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7); } 70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(52, 211, 153, 0); } 100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); } }
+
+    /* Controls */
+    .toggle-btn, .term-btn { background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-muted); border-radius: 50%; width: 40px; height: 40px; font-size: 1.1rem; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); display: flex; align-items: center; justify-content: center; }
+    .top-controls { display: flex; gap: 8px; }
+    .toggle-btn:hover, .term-btn:hover { transform: translateY(-2px) scale(1.05); color: var(--primary); border-color: var(--primary); background: var(--bg-hover); box-shadow: var(--card-glow); }
+
+    /* Live Ticker */
+    .ticker-wrap { width: 100%; overflow: hidden; background: var(--bg-card); border-radius: 8px; padding: 6px 0; margin-top: 0.8rem; border: 1px solid var(--border-color); white-space: nowrap; }
+    .ticker { display: inline-block; white-space: nowrap; padding-right: 100%; animation: ticker 30s linear infinite; }
+    .ticker__item { display: inline-block; padding: 0 1.5rem; font-size: 0.8rem; font-family: 'JetBrains Mono', monospace; color: var(--primary); font-weight: 600; }
+    @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
+
+    /* Animated Gradient Title */
+    h1 { margin-top: 0.8rem; font-size: 2.2rem; font-weight: 800; cursor: default; letter-spacing: -0.03em; line-height: 1.2; }
+    .animated-title { background: linear-gradient(to right, #6366f1, #10b981, #8b5cf6, #6366f1); background-size: 300% 300%; -webkit-background-clip: text; color: transparent; animation: gradientFlow 8s ease infinite; transition: transform 0.3s ease; display: inline-block; }
+    .animated-title:hover { transform: scale(1.02); }
+    @keyframes gradientFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+
+    h2 { margin-top: 1rem; font-size: 1.3rem; font-weight: 700; border-bottom: 2px solid var(--border-color); padding-bottom: 0.3rem; display: flex; align-items: center; gap: 8px; color: var(--text-main); letter-spacing: -0.02em; }
+    h2 i { color: var(--primary); font-size: 1.2rem; }
+    h3 { margin-top: 0.8rem; font-size: 1.1rem; font-weight: 700; display: flex; align-items: center; color: var(--text-main); letter-spacing: -0.01em; }
+    .icon-accent { color: var(--primary); margin-right: 8px; font-size: 1.1rem; }
+    
+    .subheading { font-size: 0.9rem; color: var(--text-muted); margin-top: 0.2rem; margin-bottom: 0.6rem; }
+
+    /* Sections - Solid Backgrounds, Tight Spacing */
+    .section { margin-bottom: 1.5rem; padding: 1.2rem; border-radius: 12px; background: var(--bg-card); border: 1px solid var(--border-color); box-shadow: var(--card-shadow); animation: fadeInUp 0.5s ease-out both; transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.4s ease, border-color 0.4s ease; }
+    .section:hover { box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1); border-color: var(--primary); }
+    .section:nth-child(5) { animation-delay: 0.1s; }
+    .section:nth-child(6) { animation-delay: 0.2s; }
+    @keyframes fadeInUp { 0% { transform: translateY(15px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
+
+    /* Skills */
+    .skills-container { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 0.8rem; margin-bottom: 1.2rem; }
+    .skill-pill { font-size: 0.75rem; padding: 4px 12px; border-radius: 99px; background: var(--bg-hover); border: 1px solid var(--border-color); color: var(--text-main); font-weight: 600; cursor: default; transition: all 0.3s ease; }
+    .skill-pill:hover { background: var(--primary); color: white; border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3); }
+
+    /* Modern Pill Buttons */
+    .button-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 0.5rem; margin-bottom: 0.8rem; }
+    .button { display: inline-flex; align-items: center; padding: 0.5rem 1rem; font-size: 0.9rem; font-weight: 700; border-radius: 99px; text-decoration: none; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); color: white; position: relative; border: none; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.1); overflow: hidden; }
+    .button::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(255,255,255,0.1), transparent); opacity: 0; transition: opacity 0.3s; }
+    .button i { margin-right: 6px; font-size: 1rem; }
+    .button:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,0,0,0.15); filter: brightness(1.1); }
+    .button:hover::before { opacity: 1; }
+    .button:active { transform: translateY(-1px); }
+
+    .appstore { background-color: #006edb; }
+    .apk { background-color: #10b981; }
+    .github { background-color: #0f172a; }
+    .bots-channel { background-color: #0ea5e9; }
+    .bot { background-color: #06b6d4; }
+    .contact { background-color: var(--primary); }
+    .whatsapp { background-color: #22c55e; }
+    
+    .btn-premium { background: linear-gradient(135deg, #f59e0b, #ea580c); color: #ffffff !important; box-shadow: 0 2px 10px rgba(245, 158, 11, 0.3); }
+    .btn-premium:hover { box-shadow: 0 6px 15px rgba(245, 158, 11, 0.5); }
+
+    /* Tabs */
+    .tabs-header { display: flex; gap: 12px; margin-bottom: 1.2rem; border-bottom: 2px solid var(--border-color); overflow-x: auto; padding-bottom: 4px; -ms-overflow-style: none; scrollbar-width: none; }
+    .tabs-header::-webkit-scrollbar { display: none; }
+    .tab-btn { background: none; border: none; color: var(--text-muted); font-size: 0.95rem; font-weight: 700; cursor: pointer; padding: 0.4rem 0.2rem; transition: all 0.3s ease; white-space: nowrap; position: relative; }
+    .tab-btn:hover { color: var(--text-main); }
+    .tab-btn.active { color: var(--primary); }
+    .tab-btn.active::after { content: ''; position: absolute; bottom: -6px; left: 0; width: 100%; height: 3px; background-color: var(--primary); border-radius: 3px 3px 0 0; }
+    .tab-content { display: none; animation: fadeInTab 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+    .tab-content.active { display: block; }
+    @keyframes fadeInTab { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Beautified Cards - Solid */
+    .bot-featured, .bot-item {
+      background: var(--bg-hover);
+      border: 1px solid var(--border-color);
+      padding: 1.2rem;
+      border-radius: 10px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      margin-bottom: 0.8rem;
+    }
+    
+    .bot-featured::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(to bottom, #6366f1, #8b5cf6); }
+    .bot-item::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(to bottom, #10b981, #06b6d4); }
+    .channel-app::before { background: linear-gradient(to bottom, #3b82f6, #06b6d4); }
+    .channel-mod::before { background: linear-gradient(to bottom, #10b981, #8b5cf6); }
+
+    .bot-featured:hover, .bot-item:hover { transform: translateY(-3px); box-shadow: var(--card-glow); border-color: var(--primary); }
+
+    /* Eye-Friendly Badges */
+    .badges { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 0.6rem; }
+    .badge { display: inline-flex; align-items: center; gap: 4px; font-size: 0.7rem; padding: 3px 8px; border-radius: 4px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); }
+    .badge i { font-size: 0.75rem; opacity: 0.9; }
+    
+    /* FAQ Accordions */
+    .faq-container { margin-top: 1.2rem; border-top: 1px solid var(--border-color); padding-top: 0.8rem; }
+    .faq-container h4 { margin-bottom: 0.8rem; font-size: 1rem; color: var(--text-main); display: flex; align-items: center; gap: 6px; font-weight: 700; }
+    
+    details { background: var(--bg-hover); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 8px; transition: all 0.2s ease; }
+    details:hover { border-color: var(--primary); }
+    summary { color: var(--text-main); font-weight: 600; font-size: 0.9rem; cursor: pointer; outline: none; list-style: none; position: relative; padding: 10px 12px; padding-right: 30px; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: '\f078'; font-family: 'Font Awesome 6 Free'; font-weight: 900; position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font-size: 0.8rem; transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1); color: var(--text-muted); }
+    details[open] { border-color: var(--border-color); }
+    details[open] summary::after { transform: translateY(-50%) rotate(180deg); color: var(--primary); }
+    details p { margin: 0; padding: 0 12px 12px 12px; font-size: 0.85rem; color: var(--text-muted); animation: slideDown 0.2s cubic-bezier(0.16, 1, 0.3, 1); line-height: 1.5; }
+    @keyframes slideDown { from { opacity: 0; transform: translateY(-3px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Crypto & Tip Jar */
+    .crypto-box { background: var(--bg-hover); border: 1px solid var(--border-color); padding: 10px 12px; border-radius: 8px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); word-break: break-all; user-select: none; -webkit-user-select: none; }
+    .crypto-box:hover { transform: translateY(-1px); border-color: var(--primary); box-shadow: var(--card-shadow); }
+    .crypto-details { flex: 1; margin-right: 12px; }
+    .crypto-label { font-weight: 700; font-size: 0.85rem; margin-bottom: 2px; display: flex; align-items: center; gap: 6px; color: var(--text-main); }
+    .crypto-label i { color: var(--primary); }
+    .crypto-address { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-muted); }
+    .crypto-icon { font-size: 1.1rem; color: var(--text-muted); transition: color 0.2s; }
+    .crypto-box:hover .crypto-icon { color: var(--primary); }
+
+    /* Tech Stack Grid */
+    .tech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-top: 0.8rem; }
+    .tech-card { background: var(--bg-hover); padding: 0.8rem; border-radius: 8px; border: 1px solid var(--border-color); display: flex; align-items: center; gap: 10px; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+    .tech-card:hover { transform: translateY(-2px); border-color: var(--primary); box-shadow: var(--card-shadow); }
+    .tech-card i { font-size: 1.3rem; color: var(--primary); }
+    .tech-text-main { color: var(--text-main); font-weight: 700; font-size: 0.9rem; }
+    .tech-text-sub { color: var(--text-muted); font-size: 0.75rem; margin-top: 2px; }
+
+    /* Terminal Modal */
+    #terminal-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 2000; align-items: center; justify-content: center; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+    .terminal-window { width: 90%; max-width: 550px; background: #0d1117; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.6); overflow: hidden; border: 1px solid #30363d; }
+    .terminal-header { background: #161b22; padding: 8px 12px; display: flex; justify-content: space-between; align-items: center; color: #8b949e; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.8rem; font-weight: 600; border-bottom: 1px solid #30363d; }
+    .term-close { cursor: pointer; color: #ff7b72; font-weight: bold; font-size: 1.1rem; line-height: 1; transition: all 0.2s; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
+    .term-close:hover { color: #f85149; }
+    .terminal-body { padding: 12px; font-family: 'JetBrains Mono', monospace; color: #3fb950; height: 250px; overflow-y: auto; font-size: 0.85rem; line-height: 1.5; }
+    .terminal-input-line { display: flex; margin-top: 8px; align-items: center; }
+    .term-prompt { margin-right: 8px; color: #58a6ff; font-weight: 600; }
+    #term-input { background: transparent; border: none; color: #c9d1d9; font-family: inherit; font-size: inherit; width: 100%; outline: none; }
+
+    /* Utilities & Footers */
+    #toast { visibility: hidden; min-width: 180px; background: var(--text-main); color: var(--bg-base); text-align: center; border-radius: 99px; padding: 10px 16px; position: fixed; z-index: 1001; left: 50%; bottom: 30px; transform: translateX(-50%) translateY(15px); font-size: 0.85rem; font-weight: 700; box-shadow: 0 8px 20px rgba(0,0,0,0.2); opacity: 0; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+    #toast.show { visibility: visible; opacity: 1; transform: translateX(-50%) translateY(0); }
+    
+    .email-link { text-decoration: none; font-weight: 600; transition: all 0.2s ease; cursor: pointer; user-select: none; -webkit-user-select: none; color: var(--text-main); padding: 2px 6px; border-radius: 4px; background: var(--bg-hover); border: 1px solid var(--border-color); }
+    .email-link:hover { color: var(--primary); border-color: var(--primary); }
+    
+    #backToTop { position: fixed; bottom: 1.5rem; right: 1.5rem; width: 45px; height: 45px; background: var(--bg-card); color: var(--text-main); border: 1px solid var(--border-color); border-radius: 50%; cursor: pointer; box-shadow: var(--card-shadow); display: flex; align-items: center; justify-content: center; z-index: 999; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); opacity: 0; visibility: hidden; transform: translateY(15px); font-size: 1.1rem; }
+    #backToTop.show { opacity: 1; visibility: visible; transform: translateY(0); }
+    #backToTop:hover { color: white; background: var(--primary); border-color: var(--primary); transform: translateY(-3px); box-shadow: var(--card-glow); }
+    
+    footer { text-align: center; margin-top: 2rem; padding-bottom: 1.5rem; color: var(--text-muted); font-size: 0.9rem; }
+    .footer-whale { font-size: 1.8rem; margin-bottom: 0.6rem; display: inline-block; animation: floatWhale 3s ease-in-out infinite; color: var(--primary); }
+    @keyframes floatWhale { 0% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-6px) rotate(3deg); } 100% { transform: translateY(0px) rotate(0deg); } }
+    .footer-quote { margin-top: 0.6rem; font-style: italic; font-size: 0.85rem; opacity: 0.8; }
+  </style>
+</head>
+<body>
+
+  <div id="boot-screen">
+    <div id="boot-text-container"></div>
+  </div>
+
+  <div id="particles-js"></div>
+
+  <div class="top-bar">
+    <div class="status-indicator">
+      <div class="pulse-dot"></div>
+      Servers Online
+    </div>
+    <div class="top-controls">
+      <button class="term-btn" onclick="openTerminal()" aria-label="Open Terminal"><i class="fas fa-terminal"></i></button>
+      <button class="toggle-btn" onclick="toggleTheme()" id="themeToggle" aria-label="Toggle Dark/Light Mode"></button>
+    </div>
+  </div>
+
+  <div class="ticker-wrap">
+    <div class="ticker">
+      <div class="ticker__item">[v2.4] Digital Auto Rename Bot - Worker architecture optimized.</div>
+      <div class="ticker__item">[Update] Sequence tracking for Series now live.</div>
+      <div class="ticker__item">[Status] All core database clusters operating at optimal efficiency.</div>
+      <div class="ticker__item">[Feature] Max limit handling increased for premium tasks.</div>
+    </div>
+  </div>
+
+  <h1 class="animated-title">FastWhale 🐋</h1>
+
+  <div class="section intro">
+    <p style="margin-top: 0; font-size: 0.95rem;">Welcome to my corner of the internet! I'm Nam — Ads manager, a builder, optimizer, and Telegram bot architect with zero tolerance for fluff and full commitment to precision. If it runs, I've patched it. If it breaks, I fix fast.</p>
+    
+    <div class="skills-container">
+      <span class="skill-pill">Python</span>
+      <span class="skill-pill">Pyrogram</span>
+      <span class="skill-pill">Telethon</span>
+      <span class="skill-pill">Database Arch</span>
+      <span class="skill-pill">SysAdmin</span>
+    </div>
+
+    <div class="button-row">
+      <a href="https://github.com/yuIlariy" target="_blank" class="button github" aria-label="View GitHub">
+        <i class="fab fa-github"></i>GitHub
+      </a>
+      <a href="https://t.me/OtherBs" target="_blank" class="button bots-channel" aria-label="Join Bots Channel">
+        <i class="fab fa-telegram-plane"></i>Bots Channel
+      </a>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><i class="fas fa-robot"></i> Telegram Bots</h2>
+    
+    <div class="tabs-header" role="tablist">
+      <button class="tab-btn active" onclick="openTab(event, 'flagship')" role="tab" aria-selected="true">Flagship Bot</button>
+      <button class="tab-btn" onclick="openTab(event, 'utilities')" role="tab" aria-selected="false">Utility Bots</button>
+    </div>
+
+    <div id="flagship" class="tab-content active" role="tabpanel">
+      <div class="bot-featured">
+        <div class="badges">
+          <span class="badge"><i class="fas fa-star" style="color: var(--primary);"></i> Flagship</span>
+          <span class="badge"><i class="fas fa-weight-hanging" style="color: var(--accent-green);"></i> 2GB+</span>
+          <span class="badge"><i class="fas fa-gem" style="color: #f59e0b;"></i> Pro</span>
+        </div>
+        <h3><i class="fas fa-microchip icon-accent"></i> Digital Auto Rename Bot</h3>
+        <p class="subheading">The ultimate file management powerhouse. Built with a robust worker-based architecture and advanced queue management. Seamlessly auto-renames massive 2GB+ files, tracks complex naming sequences, and processes at lightning speed.</p>
+        <div class="button-row" style="margin-top: 1rem;">
+          <a href="https://t.me/DigitalAutoRenameBot" target="_blank" class="button btn-premium" aria-label="Launch Digital Auto Rename Bot">
+            <i class="fas fa-rocket"></i>Launch Bot
+          </a>
+        </div>
+      </div>
+
+      <div class="faq-container">
+        <h4><i class="fas fa-clipboard-question icon-accent"></i> Flagship FAQ</h4>
+        <details>
+          <summary>What is the max file size for the auto-renamer?</summary>
+          <p>The Digital Auto Rename Bot easily handles files over 2GB without breaking a sweat, ensuring even the heaviest media files are processed perfectly.</p>
+        </details>
+        <details>
+          <summary>How do I upgrade to the premium tier?</summary>
+          <p>You can upgrade directly within the bot menu. It's built to be extremely affordable for heavy users who need unlimited queues and zero restrictions.</p>
+        </details>
+        <details>
+          <summary>Can the bot track episode sequences automatically?</summary>
+          <p>Yes. The worker architecture is designed specifically to maintain accurate sequences for entire TV series seasons and movie collections.</p>
+        </details>
+      </div>
+    </div>
+
+    <div id="utilities" class="tab-content" role="tabpanel">
+      
+      <div class="bot-item">
+        <div class="badges">
+          <span class="badge"><i class="fas fa-bolt" style="color: #06b6d4;"></i> High Capacity</span>
+          <span class="badge"><i class="fas fa-weight-hanging" style="color: var(--accent-green);"></i> 2GB+</span>
+        </div>
+        <h3><i class="fas fa-server icon-accent"></i> Digital Files Renamer</h3>
+        <p class="subheading">Your go-to solution for rapid, high-capacity file renaming. Whether it's documents, archives, or generic media, this backup instance handles 2GB+ files efficiently without breaking a sweat.</p>
+        <div class="button-row">
+          <a href="https://t.me/digitalfilesrenamebot" target="_blank" class="button bot" aria-label="Try Digital Files Renamer Bot">
+            <i class="fab fa-telegram-plane"></i>Try Renamer
+          </a>
+        </div>
+      </div>
+
+      <div class="bot-item">
+        <div class="badges">
+          <span class="badge"><i class="fas fa-film" style="color: var(--primary);"></i> Media Focus</span>
+        </div>
+        <h3><i class="fas fa-clapperboard icon-accent"></i> Auto Renamers</h3>
+        <p class="subheading">Engineered specifically for media hoarders. This specialized bot detects, formats, and organizes your Movies and TV Series with pristine naming conventions and clean metadata.</p>
+        <div class="button-row">
+          <a href="https://t.me/AutoRenamersBot" target="_blank" class="button bot" aria-label="Try Auto Renamers Bot">
+            <i class="fab fa-telegram-plane"></i>Organize Media
+          </a>
+        </div>
+      </div>
+
+      <div class="faq-container">
+        <h4><i class="fas fa-clipboard-question icon-accent"></i> Utilities FAQ</h4>
+        <details>
+          <summary>What file types do these utility bots support?</summary>
+          <p>They support virtually all Telegram-allowed file types. The <em>Auto Renamers</em> bot is specifically tuned for `.mkv`, `.mp4`, and other video formats, while the <em>Digital Files Renamer</em> handles all formats like `.zip`, `.pdf`, and `.rar` effortlessly.</p>
+        </details>
+        <details>
+          <summary>Is there a queue or file limit?</summary>
+          <p>Standard Telegram limits apply to the free utility bots. If you are pushing massive data loads or 2GB+ files frequently, it is highly recommended to use the <strong>Flagship Digital Auto Rename Bot</strong> on the main tab.</p>
+        </details>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section">
+    <h2><i class="fas fa-network-wired"></i> Tech Stack & Infrastructure</h2>
+    <p class="subheading">The tools and engines powering my deployments and bots.</p>
+    
+    <div class="tech-grid">
+      <div class="tech-card">
+        <i class="fab fa-python"></i>
+        <div>
+          <div class="tech-text-main">Backend</div>
+          <div class="tech-text-sub">Python, Pyrogram</div>
+        </div>
+      </div>
+      <div class="tech-card">
+        <i class="fas fa-database"></i>
+        <div>
+          <div class="tech-text-main">Databases</div>
+          <div class="tech-text-sub">MongoDB, Redis</div>
+        </div>
+      </div>
+      <div class="tech-card">
+        <i class="fas fa-server"></i>
+        <div>
+          <div class="tech-text-main">Hosting</div>
+          <div class="tech-text-sub">Render, systemd Linux</div>
+        </div>
+      </div>
+      <div class="tech-card">
+        <i class="fas fa-wifi"></i>
+        <div>
+          <div class="tech-text-main">Networking</div>
+          <div class="tech-text-sub">MikroTik RouterOS</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><i class="fas fa-mug-hot"></i> Buy Me Coffee</h2>
+    <p class="subheading">If my tools save you time, consider dropping a tip. It keeps the servers running, the code flowing, and the APIs paid for.</p>
+    
+    <div class="crypto-box" onclick="copyText('0x3374677728e264dc0e006821dea242c4424766f1', 'BEP20 Address copied!')" tabindex="0" aria-label="Copy BEP20 USDT Address">
+      <div class="crypto-details">
+        <div class="crypto-label"><i class="fas fa-wallet"></i> USDT (BEP20)</div>
+        <div class="crypto-address">0x3374677728e264dc0e006821dea242c4424766f1</div>
+      </div>
+      <i class="far fa-copy crypto-icon"></i>
+    </div>
+
+    <div class="crypto-box" onclick="copyText('TRUfcJwrPWb3q5wbETJZDQuQY3WZQbKDGg', 'TRC20 Address copied!')" tabindex="0" aria-label="Copy TRC20 USDT Address">
+      <div class="crypto-details">
+        <div class="crypto-label"><i class="fas fa-coins"></i> USDT (TRC20)</div>
+        <div class="crypto-address">TRUfcJwrPWb3q5wbETJZDQuQY3WZQbKDGg</div>
+      </div>
+      <i class="far fa-copy crypto-icon"></i>
+    </div>
+
+    <div class="crypto-box" onclick="copyText('734131187', 'Binance ID copied!')" tabindex="0" aria-label="Copy Binance Pay ID">
+      <div class="crypto-details">
+        <div class="crypto-label"><i class="fas fa-qrcode"></i> Binance Pay ID</div>
+        <div class="crypto-address">734131187</div>
+      </div>
+      <i class="far fa-copy crypto-icon"></i>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><i class="fas fa-bullhorn"></i> App & Mod Channels</h2>
+    <div class="bot-row" style="margin-top: 0.8rem;">
+      
+      <div class="bot-item channel-app">
+        <div class="badges">
+          <span class="badge"><i class="fab fa-google-play" style="color: #3b82f6;"></i> Verified</span>
+        </div>
+        <h3><i class="fab fa-android icon-accent"></i> Main App Hub</h3>
+        <p class="subheading">Your go-to source for the latest stable app releases and reliable updates.</p>
+        <div class="button-row">
+          <a href="https://t.me/UnlimAPKS" target="_blank" class="button appstore" aria-label="Visit App Hub Channel">Visit Channel</a>
+        </div>
+      </div>
+
+      <div class="bot-item channel-mod">
+        <div class="badges">
+          <span class="badge"><i class="fas fa-unlock-alt" style="color: var(--accent-green);"></i> Unlocked</span>
+        </div>
+        <h3><i class="fas fa-fire icon-accent"></i> Premium Mods</h3>
+        <p class="subheading">Unlocked premium APKs and exclusive mods for the savvy Android user.</p>
+        <div class="button-row">
+          <a href="https://t.me/UnlimAPKS" target="_blank" class="button apk" aria-label="Visit Mod APK Channel">APK Premiums</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><i class="fas fa-paper-plane"></i> Contact & Collab</h2>
+    <p class="subheading">Have a project in mind, need bot architecture, or want to discuss server setups? Let's chat.</p>
+    
+    <div class="button-row">
+      <a href="https://t.me/xspes" target="_blank" class="button contact" aria-label="Message on Telegram">
+        <i class="fab fa-telegram-plane"></i>Telegram Me
+      </a>
+    </div>
+    
+    <p style="margin-top: 1.2rem; margin-bottom: 0.4rem; font-weight: 600; font-size: 0.9rem;">Email me directly:</p>
+    <div>
+      <span class="email-link" onclick="copyText('ping@fastwhale.app', 'Email copied!')" tabindex="0" aria-label="Copy Email Address">
+        <i class="far fa-envelope" style="margin-right: 4px; opacity: 0.8;"></i> ping@fastwhale.app
+      </span>
+    </div>
+
+    <p style="margin-top: 1.2rem; margin-bottom: 0.4rem; font-weight: 600; font-size: 0.9rem;">Prefer meta chaos? Hit me on WhatsApp:</p>
     <a href="https://wa.me/254708583813?text=Hey%20Nam!%20Just%20landed%20on%20fastwhale.app%20and%20had%20to%20say%20%E2%80%94%20slick%20setup.%20Got%20a%20minute%3F" target="_blank" class="button whatsapp" aria-label="Message on WhatsApp">
       <i class="fab fa-whatsapp"></i>WhatsApp Me
     </a>
@@ -13,12 +520,13 @@ eta chaos? Hit me on WhatsApp:</p>
 <div id="terminal-modal" role="dialog" aria-modal="true" aria-label="Terminal Modal">
   <div class="terminal-window">
     <div class="terminal-header">
-      <span>nam@fastwhale: ~</span>
-      <span class="term-close" onclick="closeTerminal()" aria-label="Close Terminal">&times;</span>
+      <span>nam@fastwhale:~</span>
+      <span class="term-close" onclick="closeTerminal()" aria-label="Close Terminal"><i class="fas fa-times" style="font-size: 0.85rem;"></i></span>
     </div>
     <div class="terminal-body" id="term-body">
-      <div>Welcome to FastWhale Server OS v1.0.</div>
-      <div>Type 'help' for a list of available commands.</div>
+      <div>Welcome to FastWhale Server OS v2.0.</div>
+      <div style="opacity: 0.7;">Type 'help' for a list of available commands.</div>
+      <br>
       <div id="term-output"></div>
       <div class="terminal-input-line">
         <span class="term-prompt">nam@whale:~$</span>
@@ -71,22 +579,22 @@ eta chaos? Hit me on WhatsApp:</p>
     });
   });
 
-  // Initialize Particles Background (called once script has loaded)
+  // Initialize Particles Background
   function initParticles() {
     particlesJS("particles-js", {
       "particles": {
         "number": { "value": 35, "density": { "enable": true, "value_area": 800 } },
         "color": { "value": "#8b5cf6" },
         "shape": { "type": "circle" },
-        "opacity": { "value": 0.4, "random": false },
+        "opacity": { "value": 0.3, "random": true },
         "size": { "value": 3, "random": true },
-        "line_linked": { "enable": true, "distance": 150, "color": "#8b5cf6", "opacity": 0.2, "width": 1 },
-        "move": { "enable": true, "speed": 1.5, "direction": "none", "random": true, "out_mode": "out" }
+        "line_linked": { "enable": true, "distance": 150, "color": "#6366f1", "opacity": 0.2, "width": 1 },
+        "move": { "enable": true, "speed": 1.2, "direction": "none", "random": true, "out_mode": "out" }
       },
       "interactivity": {
         "detect_on": "canvas",
         "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
-        "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.5 } } }
+        "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.4 } } }
       },
       "retina_detect": true
     });
@@ -168,7 +676,7 @@ eta chaos? Hit me on WhatsApp:</p>
 
   function openTerminal() {
     termModal.style.display = 'flex';
-    termInput.focus();
+    setTimeout(() => { termInput.focus(); }, 100);
   }
 
   function closeTerminal() {
@@ -183,7 +691,7 @@ eta chaos? Hit me on WhatsApp:</p>
       switch(command) {
         case 'help': response = 'Available cmds: whoami, ping, stack, date, repo, clear, exit, root'; break;
         case 'whoami': response = 'Nam. Ads manager, builder, optimizer, bot architect.'; break;
-        case 'ping': response = 'Pong! All nodes responding at 2ms. Status: GREEN.'; break;
+        case 'ping': response = 'Pong! All nodes responding at 12ms. Status: GREEN.'; break;
         case 'stack': response = 'Python, Pyrogram, MongoDB, Redis, systemd, MikroTik RouterOS'; break;
         case 'date': response = new Date().toString(); break;
         case 'repo': response = 'Fetching source from GitHub... [Access Denied] Check out https://github.com/yuIlariy instead.'; break;
@@ -197,7 +705,7 @@ eta chaos? Hit me on WhatsApp:</p>
 
       if (command !== '') {
         termOutput.innerHTML += `<div><span class="term-prompt">nam@whale:~$</span> ${command}</div>`;
-        if(response) termOutput.innerHTML += `<div style="color: #8b949e; margin-bottom: 5px;">${response}</div>`;
+        if(response) termOutput.innerHTML += `<div style="color: #94a3b8; margin-bottom: 8px;">${response}</div>`;
       }
       
       termInput.value = '';
