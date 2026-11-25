@@ -25,8 +25,13 @@ use `../`, and `main.js` automatically prefixes nav links with `../` on
 sub-pages (nav `file` paths in `site.config.js` stay root-relative).
 
 Every page loads `site.config.js` first, then `assets/js/main.js`, which renders the
-shared header/nav/ticker/footer/terminal from the config and fills all
-`data-site` / `data-site-link` placeholders in the page.
+shared chrome from the config and fills all `data-site` / `data-site-link` placeholders:
+
+- top bar with **☰ hamburger (top left)** opening a slide-in drawer with the page links,
+  live status pill, terminal and theme toggle
+- ticker, footer, terminal modal, toast, back-to-top, particles
+- the boot screen plays **once per session** (`sessionStorage`), not on every page switch
+- sub-pages get an animated page title injected from the nav config
 
 ## Changing the domain (yearly)
 
