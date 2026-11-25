@@ -36,19 +36,22 @@
   canon.setAttribute('href', pageUrl);
 
   /* ---------- Shared chrome injection ---------- */
-  var boot = document.createElement('div');
-  boot.id = 'boot-screen';
-  boot.innerHTML = '<div id="boot-text-container"></div>';
-  document.body.insertBefore(boot, document.body.firstChild);
+  /* Boot screen plays once per session, not on every page navigation. */
+  var booted = false;
+  try { booted = sessionStorage.getItem('fw-booted') === '1'; } catch (e) {}
+  var bootScreen = null;
+  var bootContainer = null;
+  if (!booted) {
+    bootScreen = document.createElement('div');
+    bootScreen.id = 'boot-screen';
+    bootScreen.innerHTML = '<div id="boot-text-container"></div>';
+    document.body.insertBefore(bootScreen, document.body.firstChild);
+    bootContainer = bootScreen.firstChild || document.getElementById('boot-text-container');
+  }
 
   var particles = document.createElement('div');
   particles.id = 'particles-js';
   document.body.insertBefore(particles, document.body.firstChild);
-
-  var navLinks = (cfg.nav || []).map(function (n) {
-    var active = n.id === page ? ' class="active" aria-current="page"' : '';
-    return '<a href="' + prefix + n.file + '"' + active + '><i class="' + n.icon + '"></i>' + n.label + '</a>';
-  }).join('');
 
   var tickerItems = (cfg.ticker || []).map(function (t) {
     return '<div class="ticker__item">' + t + '</div>';
@@ -57,7 +60,10 @@
   var header = document.createElement('header');
   header.innerHTML =
     '<div class="top-bar">' +
-      '<a class="brand" href="' + prefix + 'index.html">' + emoji + ' <span data-site="brand"></span></a>' +
+      '<div class="top-left">' +
+        '<button class="nav-toggle" id="navToggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="siteDrawer"><i class="fas fa-bars"></i></button>' +
+        '<a class="brand" href="' + prefix + 'index.html">' + emoji + ' <span data-site="brand"></span></a>' +
+      '</div>' +
       '<div class="top-controls">' +
         '<div class="status-indicator" id="status-indicator">' +
           '<div class="pulse-dot" id="status-dot"></div>' +
@@ -67,9 +73,24 @@
         '<button class="toggle-btn" id="themeToggle" aria-label="Toggle Dark/Light Mode"></button>' +
       '</div>' +
     '</div>' +
-    '<nav class="main-nav" aria-label="Main navigation">' + navLinks + '</nav>' +
     '<div class="ticker-wrap"><div class="ticker">' + tickerItems + '</div></div>';
   document.body.insertBefore(header, document.body.firstChild);
+
+  /* Slide-in drawer navigation (hamburger at top left) */
+  var drawerLinks = (cfg.nav || []).map(function (n) {
+    var active = n.id === page ? ' class="active" aria-current="page"' : '';
+    return '<a href="' + prefix + n.file + '"' + active + '><i class="' + n.icon + '"></i>' + n.label + '</a>';
+  }).join('');
+  document.body.insertAdjacentHTML('beforeend',
+    '<div class="drawer-overlay" id="drawerOverlay"></div>' +
+    '<aside class="drawer" id="siteDrawer" aria-label="Site navigation">' +
+      '<div class="drawer-head">' +
+        '<span class="brand">' + emoji + ' <span data-site="brand"></span></span>' +
+        '<button class="drawer-close" id="drawerClose" aria-label="Close navigation menu"><i class="fas fa-times"></i></button>' +
+      '</div>' +
+      '<nav class="drawer-nav">' + drawerLinks + '</nav>' +
+      '<div class="drawer-foot" data-site="domain"></div>' +
+    '</aside>');
 
   var footer = document.createElement('footer');
   footer.innerHTML =
@@ -132,6 +153,39 @@
     el.setAttribute('href', linkFor(el.getAttribute('data-site-link')));
   });
 
+  /* ---------- Sub-page title + drawer navigation ---------- */
+  var mainEl = document.querySelector('main');
+  if (mainEl && page !== 'home' && navItem.label) {
+    mainEl.insertAdjacentHTML('afterbegin', '<h1 class="animated-title">' + navItem.label + ' ' + emoji + '</h1>');
+  }
+
+  var drawer = document.getElementById('siteDrawer');
+  var drawerOverlay = document.getElementById('drawerOverlay');
+  var navToggle = document.getElementById('navToggle');
+  function openDrawer() {
+    drawer.classList.add('show');
+    drawerOverlay.classList.add('show');
+    document.body.classList.add('drawer-open');
+    navToggle.setAttribute('aria-expanded', 'true');
+  }
+  function closeDrawer() {
+    drawer.classList.remove('show');
+    drawerOverlay.classList.remove('show');
+    document.body.classList.remove('drawer-open');
+    navToggle.setAttribute('aria-expanded', 'false');
+  }
+  navToggle.addEventListener('click', function () {
+    if (drawer.classList.contains('show')) closeDrawer(); else openDrawer();
+  });
+  document.getElementById('drawerClose').addEventListener('click', closeDrawer);
+  drawerOverlay.addEventListener('click', closeDrawer);
+  drawer.addEventListener('click', function (e) {
+    if (e.target.closest && e.target.closest('a')) closeDrawer();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeDrawer();
+  });
+
   /* ---------- Theme ---------- */
   var root = document.documentElement;
   var toggleBtn = document.getElementById('themeToggle');
@@ -146,9 +200,7 @@
     renderToggle();
   });
 
-  /* ---------- Boot screen ---------- */
-  var bootScreen = document.getElementById('boot-screen');
-  var bootContainer = document.getElementById('boot-text-container');
+  /* ---------- Boot screen (once per session) ---------- */
   var lines = [
     '[ OK ] Booting ' + brand + ' OS kernel...',
     '[ OK ] Mounting MongoDB distributed clusters...',
@@ -158,21 +210,25 @@
     '> Access Granted. Welcome, Nam.'
   ];
   function hideBoot() {
+    if (!bootScreen) return;
     bootScreen.style.opacity = '0';
     setTimeout(function () { bootScreen.style.visibility = 'hidden'; }, 400);
+    try { sessionStorage.setItem('fw-booted', '1'); } catch (e) {}
   }
-  setTimeout(hideBoot, 2800); /* safety: never trap the page behind the boot screen */
-  var delay = 100;
-  lines.forEach(function (line, index) {
-    setTimeout(function () {
-      var div = document.createElement('div');
-      div.className = 'boot-line';
-      div.textContent = line;
-      bootContainer.appendChild(div);
-      if (index === lines.length - 1) setTimeout(hideBoot, 600);
-    }, delay);
-    delay += Math.floor(Math.random() * 150) + 100;
-  });
+  if (bootScreen) {
+    setTimeout(hideBoot, 2800); /* safety: never trap the page behind the boot screen */
+    var delay = 100;
+    lines.forEach(function (line, index) {
+      setTimeout(function () {
+        var div = document.createElement('div');
+        div.className = 'boot-line';
+        div.textContent = line;
+        bootContainer.appendChild(div);
+        if (index === lines.length - 1) setTimeout(hideBoot, 600);
+      }, delay);
+      delay += Math.floor(Math.random() * 150) + 100;
+    });
+  }
 
   /* ---------- Particles ---------- */
   function initParticles() {
