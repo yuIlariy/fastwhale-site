@@ -5,11 +5,12 @@ Modern multi-page static site for **FastWhale 🐋** — zero build step, served
 ## Structure
 
 ```
-├── index.html          Home — intro, skills, explore cards
-├── bots.html           Telegram bots (flagship + utility, tabs & FAQ)
-├── stack.html          Tech stack & infrastructure
-├── channels.html       App/mod/ROM channels + tip jar
-├── contact.html        Telegram, email, WhatsApp
+├── index.html          Home — intro, skills, explore cards (must stay at root: GitHub Pages serves it as the homepage)
+├── pages/
+│   ├── bots.html       Telegram bots (flagship + utility, tabs & FAQ)
+│   ├── stack.html      Tech stack & infrastructure
+│   ├── channels.html   App/mod/ROM channels + tip jar
+│   └── contact.html    Telegram, email, WhatsApp
 ├── site.config.js      ← THE config: brand, domain, links, tips, nav, pages
 ├── assets/
 │   ├── css/style.css   All styles (theme variables, dark/light)
@@ -18,6 +19,10 @@ Modern multi-page static site for **FastWhale 🐋** — zero build step, served
 ├── CNAME               GitHub Pages custom domain
 └── LICENSE
 ```
+
+Sub-pages live in `pages/` so the root stays clean. Their asset/config links
+use `../`, and `main.js` automatically prefixes nav links with `../` on
+sub-pages (nav `file` paths in `site.config.js` stay root-relative).
 
 Every page loads `site.config.js` first, then `assets/js/main.js`, which renders the
 shared header/nav/ticker/footer/terminal from the config and fills all
@@ -42,8 +47,9 @@ python3 -m http.server 8000
 
 ## Add a page
 
-1. Create `<name>.html` with `<body data-page="<name>">` and a `<main>` block.
-2. Add an entry to `nav` and `pages` in `site.config.js`.
+1. Create `pages/<name>.html` with `<body data-page="<name>">`, a `<main>` block,
+   and head links using `../assets/...` + `../site.config.js`.
+2. Add an entry to `nav` (root-relative `file: "pages/<name>.html"`) and `pages` in `site.config.js`.
 
 ## Notes
 
