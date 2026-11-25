@@ -151,7 +151,6 @@ h3 { margin-top: 0.8rem; font-size: 1.1rem; font-weight: 700; display: flex; ali
 
 .appstore { background-color: #006edb; }
 .apk { background-color: #10b981; }
-.rom { background-color: #8b5cf6; }
 .github { background-color: #0f172a; }
 .bots-channel { background-color: #0ea5e9; }
 .bot { background-color: #06b6d4; }
@@ -188,7 +187,6 @@ h3 { margin-top: 0.8rem; font-size: 1.1rem; font-weight: 700; display: flex; ali
 .bot-item::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(to bottom, #10b981, #06b6d4); }
 .channel-app::before { background: linear-gradient(to bottom, #3b82f6, #06b6d4); }
 .channel-mod::before { background: linear-gradient(to bottom, #10b981, #8b5cf6); }
-.channel-rom::before { background: linear-gradient(to bottom, #8b5cf6, #ec4899); }
 
 .bot-featured:hover, .bot-item:hover { transform: translateY(-3px); box-shadow: var(--card-glow); border-color: var(--primary); }
 

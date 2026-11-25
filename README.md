@@ -9,7 +9,7 @@ Modern multi-page static site for **FastWhale 🐋** — zero build step, served
 ├── pages/
 │   ├── bots.html       Telegram bots (flagship + utility, tabs & FAQ)
 │   ├── stack.html      Tech stack & infrastructure
-│   └── channels.html   App hub, premium mods, custom ROMs
+│   └── channels.html   App hub & premium mods
 ├── site.config.js      ← THE config: brand, domain, links, tips, nav, pages
 ├── assets/
 │   ├── css/style.css   All styles (theme variables, dark/light)
