@@ -37,8 +37,7 @@ window.SITE_CONFIG = {
     { id: "home", label: "Home", file: "index.html", icon: "fas fa-home" },
     { id: "bots", label: "Bots", file: "pages/bots.html", icon: "fas fa-robot" },
     { id: "stack", label: "Stack", file: "pages/stack.html", icon: "fas fa-network-wired" },
-    { id: "channels", label: "Channels", file: "pages/channels.html", icon: "fas fa-bullhorn" },
-    { id: "contact", label: "Contact", file: "pages/contact.html", icon: "fas fa-paper-plane" }
+    { id: "channels", label: "Channels", file: "pages/channels.html", icon: "fas fa-bullhorn" }
   ],
 
   pages: {
@@ -55,12 +54,8 @@ window.SITE_CONFIG = {
       description: "The tools and engines powering my deployments and bots: Python, Pyrogram, MongoDB, Redis, systemd, MikroTik."
     },
     channels: {
-      title: "Channels & Tips | FastWhale \uD83D\uDC0B",
-      description: "App hub, premium mods, custom ROMs and patches \u2014 plus a tip jar to keep the servers running."
-    },
-    contact: {
-      title: "Contact | FastWhale \uD83D\uDC0B",
-      description: "Have a project in mind, need bot architecture, or want to discuss server setups? Let's chat."
+      title: "Channels | FastWhale \uD83D\uDC0B",
+      description: "App hub, premium mods and custom ROM builds \u2014 unlocked APKs and patched ROMs."
     }
   },
 

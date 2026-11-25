@@ -5,12 +5,11 @@ Modern multi-page static site for **FastWhale 🐋** — zero build step, served
 ## Structure
 
 ```
-├── index.html          Home — intro, skills, explore cards (must stay at root: GitHub Pages serves it as the homepage)
+├── index.html          Home — intro, skills, explore cards, Buy Me Coffee (tip jar), Contact (must stay at root: GitHub Pages serves it as the homepage)
 ├── pages/
 │   ├── bots.html       Telegram bots (flagship + utility, tabs & FAQ)
 │   ├── stack.html      Tech stack & infrastructure
-│   ├── channels.html   App/mod/ROM channels + tip jar
-│   └── contact.html    Telegram, email, WhatsApp
+│   └── channels.html   App hub, premium mods, custom ROMs
 ├── site.config.js      ← THE config: brand, domain, links, tips, nav, pages
 ├── assets/
 │   ├── css/style.css   All styles (theme variables, dark/light)
