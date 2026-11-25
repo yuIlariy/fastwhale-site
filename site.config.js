@@ -31,12 +31,14 @@ window.SITE_CONFIG = {
     utilityBot: "https://t.me/digitalfilesrenamebot"
   },
 
+  // `file` paths are root-relative. Only index.html lives at the root
+  // (GitHub Pages serves it as the homepage); sub-pages live in pages/.
   nav: [
     { id: "home", label: "Home", file: "index.html", icon: "fas fa-home" },
-    { id: "bots", label: "Bots", file: "bots.html", icon: "fas fa-robot" },
-    { id: "stack", label: "Stack", file: "stack.html", icon: "fas fa-network-wired" },
-    { id: "channels", label: "Channels", file: "channels.html", icon: "fas fa-bullhorn" },
-    { id: "contact", label: "Contact", file: "contact.html", icon: "fas fa-paper-plane" }
+    { id: "bots", label: "Bots", file: "pages/bots.html", icon: "fas fa-robot" },
+    { id: "stack", label: "Stack", file: "pages/stack.html", icon: "fas fa-network-wired" },
+    { id: "channels", label: "Channels", file: "pages/channels.html", icon: "fas fa-bullhorn" },
+    { id: "contact", label: "Contact", file: "pages/contact.html", icon: "fas fa-paper-plane" }
   ],
 
   pages: {

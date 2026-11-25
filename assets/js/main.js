@@ -15,6 +15,9 @@
   var navItem = (cfg.nav || []).filter(function (n) { return n.id === page; })[0] || { file: 'index.html' };
   var pageInfo = (cfg.pages && cfg.pages[page]) || { title: brand, description: cfg.description || '' };
   var pageUrl = siteUrl + '/' + navItem.file;
+  /* Sub-pages live in pages/, so links injected from the root-relative nav
+   * paths need a ../ prefix when the current page is inside a folder. */
+  var prefix = navItem.file.indexOf('/') !== -1 ? '../' : '';
 
   /* ---------- Head hydration (title, meta, canonical) ---------- */
   document.title = pageInfo.title;
@@ -44,7 +47,7 @@
 
   var navLinks = (cfg.nav || []).map(function (n) {
     var active = n.id === page ? ' class="active" aria-current="page"' : '';
-    return '<a href="' + n.file + '"' + active + '><i class="' + n.icon + '"></i>' + n.label + '</a>';
+    return '<a href="' + prefix + n.file + '"' + active + '><i class="' + n.icon + '"></i>' + n.label + '</a>';
   }).join('');
 
   var tickerItems = (cfg.ticker || []).map(function (t) {
@@ -54,7 +57,7 @@
   var header = document.createElement('header');
   header.innerHTML =
     '<div class="top-bar">' +
-      '<a class="brand" href="index.html">' + emoji + ' <span data-site="brand"></span></a>' +
+      '<a class="brand" href="' + prefix + 'index.html">' + emoji + ' <span data-site="brand"></span></a>' +
       '<div class="top-controls">' +
         '<div class="status-indicator" id="status-indicator">' +
           '<div class="pulse-dot" id="status-dot"></div>' +
