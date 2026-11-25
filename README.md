@@ -32,7 +32,7 @@ shared chrome from the config and fills all `data-site` / `data-site-link` place
 - the boot screen plays **once per session** (`sessionStorage`), not on every page switch
 - sub-pages get an animated page title injected from the nav config
 
-## Changing the domain (yearly)
+## Changing the domain (whenever the domain changes / expires)
 
 1. Edit **`domain`** in `site.config.js` — that is the only place a domain lives.
    Everything is derived from it at runtime: `og:url`, `og:image`, canonical URL,
