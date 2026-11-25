@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)" />
+
+  <title>Tech Stack | FastWhale 🐋</title>
+  <meta name="description" content="The tools and engines powering my deployments and bots: Python, Pyrogram, MongoDB, Redis, systemd, MikroTik." />
+  <meta property="og:title" content="Tech Stack | FastWhale 🐋" />
+  <meta property="og:description" content="The tools and engines powering my deployments and bots: Python, Pyrogram, MongoDB, Redis, systemd, MikroTik." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="/stack.html" />
+  <meta property="og:image" content="/banner.jpg" />
+  <link rel="canonical" href="/stack.html" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+  <script>
+    (function () {
+      var t = null;
+      try { t = localStorage.getItem('fw-theme'); } catch (e) {}
+      if (!t) t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+      document.documentElement.classList.add(t);
+    })();
+  </script>
+  <script src="site.config.js"></script>
+</head>
+<body data-page="stack">
+
+  <main>
+    <div class="section">
+      <h2><i class="fas fa-network-wired"></i> Tech Stack &amp; Infrastructure</h2>
+      <p class="subheading">The tools and engines powering my deployments and bots.</p>
+
+      <div class="tech-grid">
+        <div class="tech-card">
+          <i class="fab fa-python"></i>
+          <div>
+            <div class="tech-text-main">Backend</div>
+            <div class="tech-text-sub">Python, Pyrogram</div>
+          </div>
+        </div>
+        <div class="tech-card">
+          <i class="fas fa-database"></i>
+          <div>
+            <div class="tech-text-main">Databases</div>
+            <div class="tech-text-sub">MongoDB, Redis</div>
+          </div>
+        </div>
+        <div class="tech-card">
+          <i class="fas fa-server"></i>
+          <div>
+            <div class="tech-text-main">Hosting</div>
+            <div class="tech-text-sub">Render, systemd Linux</div>
+          </div>
+        </div>
+        <div class="tech-card">
+          <i class="fas fa-wifi"></i>
+          <div>
+            <div class="tech-text-main">Networking</div>
+            <div class="tech-text-sub">MikroTik RouterOS</div>
+          </div>
+        </div>
+        <div class="tech-card">
+          <i class="fas fa-mobile-screen"></i>
+          <div>
+            <div class="tech-text-main">ROMs &amp; Patches</div>
+            <div class="tech-text-sub">Custom ROM builds, debloat</div>
+          </div>
+        </div>
+        <div class="tech-card">
+          <i class="fas fa-terminal"></i>
+          <div>
+            <div class="tech-text-main">Automation</div>
+            <div class="tech-text-sub">Telethon, worker queues</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
