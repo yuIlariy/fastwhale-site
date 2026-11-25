@@ -55,7 +55,7 @@ window.SITE_CONFIG = {
     },
     channels: {
       title: "Channels | FastWhale \uD83D\uDC0B",
-      description: "App hub, premium mods and custom ROM builds \u2014 unlocked APKs and patched ROMs."
+      description: "App hub and premium mods \u2014 stable releases and unlocked APKs."
     }
   },
 
