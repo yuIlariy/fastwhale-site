@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)" />
+
+  <title>Bots | FastWhale 🐋</title>
+  <meta name="description" content="Flagship and utility Telegram bots — worker-based auto-renaming, 2GB+ files, sequence tracking." />
+  <meta property="og:title" content="Bots | FastWhale 🐋" />
+  <meta property="og:description" content="Flagship and utility Telegram bots — worker-based auto-renaming, 2GB+ files, sequence tracking." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="/bots.html" />
+  <meta property="og:image" content="/banner.jpg" />
+  <link rel="canonical" href="/bots.html" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+  <script>
+    (function () {
+      var t = null;
+      try { t = localStorage.getItem('fw-theme'); } catch (e) {}
+      if (!t) t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+      document.documentElement.classList.add(t);
+    })();
+  </script>
+  <script src="site.config.js"></script>
+</head>
+<body data-page="bots">
+
+  <main>
+    <div class="section">
+      <h2><i class="fas fa-robot"></i> Telegram Bots</h2>
+
+      <div class="tabs-header" role="tablist">
+        <button class="tab-btn active" data-tab="flagship" role="tab" aria-selected="true">Flagship Bot</button>
+        <button class="tab-btn" data-tab="utilities" role="tab" aria-selected="false">Utility Bot</button>
+      </div>
+
+      <div id="flagship" class="tab-content active" role="tabpanel">
+        <div class="bot-featured">
+          <div class="badges">
+            <span class="badge"><i class="fas fa-star" style="color: var(--primary);"></i> Flagship</span>
+            <span class="badge"><i class="fas fa-weight-hanging" style="color: var(--accent-green);"></i> 2GB+ Support</span>
+            <span class="badge"><i class="fas fa-gem" style="color: #f59e0b;"></i> Pro</span>
+          </div>
+          <h3><i class="fas fa-microchip icon-accent"></i> Digital Auto Rename Bot</h3>
+          <p class="subheading">The ultimate file management powerhouse. Built with a robust worker-based architecture and advanced queue management. Seamlessly auto-renames massive 2GB+ files, tracks complex naming sequences, and processes at lightning speed.</p>
+          <div class="button-row" style="margin-top: 1rem;">
+            <a data-site-link="flagshipBot" target="_blank" class="button btn-premium" aria-label="Launch Digital Auto Rename Bot">
+              <i class="fas fa-rocket"></i>Launch Bot
+            </a>
+          </div>
+        </div>
+
+        <div class="faq-container">
+          <h4><i class="fas fa-clipboard-question icon-accent"></i> Flagship FAQ</h4>
+          <details>
+            <summary>What is the max file size for the auto-renamer?</summary>
+            <p>The Digital Auto Rename Bot easily handles files over 2GB without breaking a sweat, ensuring even the heaviest media files are processed perfectly.</p>
+          </details>
+          <details>
+            <summary>How do I upgrade to the premium tier?</summary>
+            <p>You can upgrade directly within the bot menu. It's built to be extremely affordable for heavy users who need unlimited queues and zero restrictions.</p>
+          </details>
+          <details>
+            <summary>Can the bot track episode sequences automatically?</summary>
+            <p>Yes. The worker architecture is designed specifically to maintain accurate sequences for entire TV series seasons and movie collections.</p>
+          </details>
+        </div>
+      </div>
+
+      <div id="utilities" class="tab-content" role="tabpanel">
+        <div class="bot-item">
+          <div class="badges">
+            <span class="badge"><i class="fas fa-bolt" style="color: #06b6d4;"></i> High Capacity</span>
+            <span class="badge"><i class="fas fa-weight-hanging" style="color: var(--accent-green);"></i> 2GB+ Support</span>
+          </div>
+          <h3><i class="fas fa-server icon-accent"></i> Digital Files Renamer</h3>
+          <p class="subheading">Your go-to solution for rapid, high-capacity file renaming. Whether it's documents, archives, or generic media, this backup instance handles 2GB+ files efficiently without breaking a sweat.</p>
+          <div class="button-row">
+            <a data-site-link="utilityBot" target="_blank" class="button bot" aria-label="Try Digital Files Renamer Bot">
+              <i class="fab fa-telegram-plane"></i>Try Renamer
+            </a>
+          </div>
+        </div>
+
+        <div class="faq-container">
+          <h4><i class="fas fa-clipboard-question icon-accent"></i> Utility FAQ</h4>
+          <details>
+            <summary>What file types does this utility bot support?</summary>
+            <p>It supports virtually all Telegram-allowed file types. The <em>Digital Files Renamer</em> handles formats like `.zip`, `.pdf`, `.rar`, `.mkv`, and `.mp4` effortlessly.</p>
+          </details>
+          <details>
+            <summary>Is there a queue or file limit?</summary>
+            <p>This utility bot is fully capable of handling massive 2GB+ data loads effortlessly with absolute zero file limits. However, as a regular-basis renamer, it does not maintain advanced queues or track episode sequences. If you need sequence tracking for TV series or movies, we highly recommend using the <strong>Flagship Digital Auto Rename Bot</strong> on the main tab.</p>
+          </details>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
