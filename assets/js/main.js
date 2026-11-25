@@ -1,39 +1,67 @@
-/* FastWhale main.js — renders the shared chrome and hydrates every
- * config-driven value from window.SITE_CONFIG (see site.config.js).
- * Change the domain there once; this file propagates it everywhere.
+/* FastWhale main.js — renders the shared chrome from window.SITE_CONFIG
+ * (see site.config.js) and provides hash-based client-side routing so the
+ * address bar stays at the bare domain (fastwhale.app/#/bots) while
+ * navigating. Pages in pages/*.html are fetched and swapped into <main>.
+ *
+ * Change the domain once in site.config.js; every domain reference on the
+ * site (og:url, og:image, canonical, email, WhatsApp text, footer, terminal)
+ * is derived from it at runtime.
  */
 (function () {
   var cfg = window.SITE_CONFIG;
   if (!cfg) { document.body.insertAdjacentHTML('beforeend', '<p style="color:#ef4444;font-family:monospace">site.config.js failed to load.</p>'); return; }
 
-  var page = document.body.getAttribute('data-page') || 'home';
   var domain = cfg.domain;
   var siteUrl = (cfg.protocol || 'https') + '://' + domain;
   var email = (cfg.emailUser || 'ping') + '@' + domain;
   var brand = cfg.brand || 'FastWhale';
   var emoji = cfg.emoji || '';
-  var navItem = (cfg.nav || []).filter(function (n) { return n.id === page; })[0] || { file: 'index.html' };
-  var pageInfo = (cfg.pages && cfg.pages[page]) || { title: brand, description: cfg.description || '' };
-  var pageUrl = siteUrl + '/' + navItem.file;
-  /* Sub-pages live in pages/, so links injected from the root-relative nav
-   * paths need a ../ prefix when the current page is inside a folder. */
-  var prefix = navItem.file.indexOf('/') !== -1 ? '../' : '';
+
+  var nav = cfg.nav || [];
+  var navIds = nav.map(function (n) { return n.id; });
+  function navById(id) {
+    for (var i = 0; i < nav.length; i++) if (nav[i].id === id) return nav[i];
+    return nav[0];
+  }
+
+  var initialPage = document.body.getAttribute('data-page') || 'home';
+  if (navIds.indexOf(initialPage) === -1) initialPage = 'home';
+
+  /* Normalize direct file URLs (/index.html, /pages/bots.html) to hash routes */
+  var pathPage = null;
+  var pm = window.location.pathname.match(/pages\/(\w+)\.html$/) || window.location.pathname.match(/index\.html$/);
+  if (pm) pathPage = pm[1] || 'home';
+  if (pathPage && navIds.indexOf(pathPage) !== -1) {
+    try { window.history.replaceState(null, '', '/#' + pathPage); } catch (e) {}
+  }
+
+  function currentRoute() {
+    var h = (window.location.hash || '').replace(/^#\/?/, '');
+    if (h && navIds.indexOf(h) !== -1) return h;
+    if (pathPage && navIds.indexOf(pathPage) !== -1) return pathPage;
+    return initialPage;
+  }
+
+  var page = currentRoute();
 
   /* ---------- Head hydration (title, meta, canonical) ---------- */
-  document.title = pageInfo.title;
   function setMeta(attr, name, content) {
     var m = document.head.querySelector('meta[' + attr + '="' + name + '"]');
     if (!m) { m = document.createElement('meta'); m.setAttribute(attr, name); document.head.appendChild(m); }
     m.setAttribute('content', content);
   }
-  setMeta('name', 'description', pageInfo.description);
-  setMeta('property', 'og:title', pageInfo.title);
-  setMeta('property', 'og:description', pageInfo.description);
-  setMeta('property', 'og:url', pageUrl);
-  setMeta('property', 'og:image', siteUrl + (cfg.banner || '/banner.jpg'));
-  var canon = document.head.querySelector('link[rel="canonical"]');
-  if (!canon) { canon = document.createElement('link'); canon.setAttribute('rel', 'canonical'); document.head.appendChild(canon); }
-  canon.setAttribute('href', pageUrl);
+  function setHead(id) {
+    var info = (cfg.pages && cfg.pages[id]) || { title: brand, description: cfg.description || '' };
+    document.title = info.title;
+    setMeta('name', 'description', info.description);
+    setMeta('property', 'og:title', info.title);
+    setMeta('property', 'og:description', info.description);
+    setMeta('property', 'og:url', siteUrl + '/');
+    setMeta('property', 'og:image', siteUrl + (cfg.banner || '/banner.jpg'));
+    var canon = document.head.querySelector('link[rel="canonical"]');
+    if (!canon) { canon = document.createElement('link'); canon.setAttribute('rel', 'canonical'); document.head.appendChild(canon); }
+    canon.setAttribute('href', siteUrl + '/');
+  }
 
   /* ---------- Shared chrome injection ---------- */
   /* Boot screen plays once per session, not on every page navigation. */
@@ -62,7 +90,7 @@
     '<div class="top-bar">' +
       '<div class="top-left">' +
         '<button class="nav-toggle" id="navToggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="siteDrawer"><i class="fas fa-bars"></i></button>' +
-        '<a class="brand" href="' + prefix + 'index.html">' + emoji + ' <span data-site="brand"></span></a>' +
+        '<a class="brand" href="#/"><span data-site="emoji"></span> <span data-site="brand"></span></a>' +
       '</div>' +
       '<div class="top-controls">' +
         '<div class="status-indicator" id="status-indicator">' +
@@ -76,16 +104,17 @@
     '<div class="ticker-wrap"><div class="ticker">' + tickerItems + '</div></div>';
   document.body.insertBefore(header, document.body.firstChild);
 
-  /* Slide-in drawer navigation (hamburger at top left) */
-  var drawerLinks = (cfg.nav || []).map(function (n) {
+  /* Slide-in drawer navigation (hamburger at top left). Hash routes keep the
+   * URL at the bare domain: fastwhale.app/#/bots */
+  var drawerLinks = nav.map(function (n) {
     var active = n.id === page ? ' class="active" aria-current="page"' : '';
-    return '<a href="' + prefix + n.file + '"' + active + '><i class="' + n.icon + '"></i>' + n.label + '</a>';
+    return '<a href="#/' + n.id + '"' + active + ' data-route="' + n.id + '"><i class="' + n.icon + '"></i>' + n.label + '</a>';
   }).join('');
   document.body.insertAdjacentHTML('beforeend',
     '<div class="drawer-overlay" id="drawerOverlay"></div>' +
     '<aside class="drawer" id="siteDrawer" aria-label="Site navigation">' +
       '<div class="drawer-head">' +
-        '<span class="brand">' + emoji + ' <span data-site="brand"></span></span>' +
+        '<span class="brand"><span data-site="emoji"></span> <span data-site="brand"></span></span>' +
         '<button class="drawer-close" id="drawerClose" aria-label="Close navigation menu"><i class="fas fa-times"></i></button>' +
       '</div>' +
       '<nav class="drawer-nav">' + drawerLinks + '</nav>' +
@@ -127,7 +156,7 @@
     '<div id="toast" role="alert" aria-live="assertive"><i class="fas fa-check-circle" style="color: var(--accent-green); margin-right: 6px;"></i> <span id="toast-msg">Copied!</span></div>' +
     '<button id="backToTop" aria-label="Back to top"><i class="fas fa-chevron-up"></i></button>');
 
-  /* ---------- Hydrate config-driven text & links in page content ---------- */
+  /* ---------- Config-driven hydration ---------- */
   function linkFor(key) {
     if (key === 'whatsapp' && cfg.whatsapp) {
       var msg = (cfg.whatsapp.message || '').split('{domain}').join(domain);
@@ -135,30 +164,95 @@
     }
     return (cfg.links && cfg.links[key]) || '#';
   }
+  function hydrateScope(root) {
+    root.querySelectorAll('[data-site]').forEach(function (el) {
+      var key = el.getAttribute('data-site');
+      if (key === 'domain') el.textContent = domain;
+      else if (key === 'siteUrl') el.textContent = siteUrl;
+      else if (key === 'email') el.textContent = email;
+      else if (key === 'brand') el.textContent = brand;
+      else if (key === 'emoji') el.textContent = emoji;
+      else if (key.indexOf('tip:') === 0) {
+        var tip = (cfg.tips || [])[parseInt(key.slice(4), 10)];
+        if (tip) el.textContent = tip.address;
+      }
+    });
+    root.querySelectorAll('[data-site-link]').forEach(function (el) {
+      el.setAttribute('href', linkFor(el.getAttribute('data-site-link')));
+    });
+  }
+  hydrateScope(document);
 
-  document.querySelectorAll('[data-site]').forEach(function (el) {
-    var key = el.getAttribute('data-site');
-    if (key === 'domain') el.textContent = domain;
-    else if (key === 'siteUrl') el.textContent = siteUrl;
-    else if (key === 'email') el.textContent = email;
-    else if (key === 'brand') el.textContent = brand;
-    else if (key === 'emoji') el.textContent = emoji;
-    else if (key.indexOf('tip:') === 0) {
-      var tip = (cfg.tips || [])[parseInt(key.slice(4), 10)];
-      if (tip) el.textContent = tip.address;
-    }
-  });
-
-  document.querySelectorAll('[data-site-link]').forEach(function (el) {
-    el.setAttribute('href', linkFor(el.getAttribute('data-site-link')));
-  });
-
-  /* ---------- Sub-page title + drawer navigation ---------- */
+  /* ---------- Hash router: swap <main> without leaving the domain ---------- */
   var mainEl = document.querySelector('main');
-  if (mainEl && page !== 'home' && navItem.label) {
-    mainEl.insertAdjacentHTML('afterbegin', '<h1 class="animated-title">' + navItem.label + ' ' + emoji + '</h1>');
+  var rendered = initialPage;
+  var pageCache = {};
+
+  function fetchPageHtml(file) {
+    if (!pageCache[file]) {
+      pageCache[file] = fetch(file).then(function (r) {
+        if (!r.ok) throw new Error('fetch failed: ' + file);
+        return r.text();
+      });
+    }
+    return pageCache[file];
   }
 
+  function injectTitle(id) {
+    var item = navById(id);
+    if (id !== 'home' && item.label) {
+      mainEl.insertAdjacentHTML('afterbegin', '<h1 class="animated-title">' + item.label + ' ' + emoji + '</h1>');
+    }
+  }
+
+  function updateDrawer(id) {
+    var links = document.querySelectorAll('.drawer-nav a');
+    for (var i = 0; i < links.length; i++) {
+      var on = links[i].getAttribute('data-route') === id;
+      links[i].classList.toggle('active', on);
+      if (on) links[i].setAttribute('aria-current', 'page'); else links[i].removeAttribute('aria-current');
+    }
+  }
+
+  function renderRoute(id, push) {
+    if (navIds.indexOf(id) === -1) id = 'home';
+    if (push) { try { window.history.pushState({ page: id }, '', '#/' + id); } catch (e) {} }
+    page = id;
+    setHead(id);
+    updateDrawer(id);
+    if (rendered !== id) {
+      fetchPageHtml(navById(id).file).then(function (html) {
+        var parsed = new DOMParser().parseFromString(html, 'text/html');
+        var m = parsed.querySelector('main');
+        mainEl.innerHTML = m ? m.innerHTML : '';
+        hydrateScope(mainEl);
+        injectTitle(id);
+        rendered = id;
+        window.scrollTo(0, 0);
+      }).catch(function () { /* keep current page on fetch error */ });
+    }
+  }
+
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="#/"]');
+    if (!a) return;
+    e.preventDefault();
+    closeDrawer();
+    var id = a.getAttribute('href').replace(/^#\/?/, '') || 'home';
+    renderRoute(id, true);
+  });
+  window.addEventListener('hashchange', function () { renderRoute(currentRoute(), false); });
+
+  /* Initial route (handles hash on load and direct /pages/x.html visits) */
+  setHead(page);
+  updateDrawer(page);
+  if (page !== rendered) {
+    renderRoute(page, false);
+  } else {
+    injectTitle(page);
+  }
+
+  /* ---------- Drawer navigation ---------- */
   var drawer = document.getElementById('siteDrawer');
   var drawerOverlay = document.getElementById('drawerOverlay');
   var navToggle = document.getElementById('navToggle');
